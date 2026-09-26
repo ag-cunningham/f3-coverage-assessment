@@ -1,0 +1,13 @@
+F3 Coverage Assessment
+Copyright 2026 Andrew Cunningham
+
+This product includes content from the MITRE Fight Fraud Framework (F3),
+Copyright 2026 MITRE, licensed under the Apache License, Version 2.0.
+https://github.com/center-for-threat-informed-defense/fight-fraud-framework
+
+The F3 v1.1 technique data embedded in index.html was converted from
+MITRE's published STIX bundle into this tool's internal format.
+
+MITRE Fight Fraud Framework, MITRE F3, and MITRE ATT&CK are trademarks
+of The MITRE Corporation. This project is not affiliated with or
+endorsed by MITRE.
