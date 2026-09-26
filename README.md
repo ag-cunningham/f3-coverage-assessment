@@ -4,7 +4,7 @@ A single-file browser tool for assessing fraud control coverage against the MITR
 
 Built by Andrew Cunningham. Version 1.0.0.
 
-**[Open the tool](https://SaintBrewski.github.io/f3-coverage-assessment/)** · [Download for offline use](../../releases/latest)
+**[Open the tool](https://ag-cunningham.github.io/f3-coverage-assessment/)** · [Download for offline use](../../releases/latest)
 
 ---
 
