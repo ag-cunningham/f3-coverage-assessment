@@ -63,7 +63,7 @@ header{border-bottom:1px solid var(--rule);background:var(--card);position:stick
 .stat{display:flex;flex-direction:column;gap:1px;padding-right:16px;border-right:1px solid var(--rule-2)}
 .stat:last-of-type{border-right:0}
 .stat b{font-size:17px;font-weight:650;letter-spacing:-.02em}
-.stat span{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.stat>span{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 .btn{font:inherit;font-size:12px;font-weight:550;padding:7px 12px;border:1px solid var(--rule);
   border-radius:5px;background:var(--card);color:var(--ink);cursor:pointer}
 .btn:hover{border-color:var(--ink-3)}
@@ -273,6 +273,145 @@ tbody tr:last-child td{border-bottom:0}
 .dacts{display:flex;gap:2px;flex-wrap:wrap}
 input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid var(--rule);border-radius:5px;background:var(--card);color:var(--ink)}
 .rbcard .fld select{width:100%}
+/* v1.1: header flag, select, panel footer */
+.kv{font-style:normal}
+.nrb{font:inherit;font-size:10.5px;font-weight:600;letter-spacing:0;margin-left:7px;padding:1px 6px;vertical-align:3px;
+  border-radius:3px;border:1px solid rgba(166,87,46,.35);background:var(--flag-soft);color:var(--flag);cursor:pointer}
+.nrb:hover{border-color:var(--flag)}
+.nrb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn:disabled:hover{border-color:var(--rule)}
+.btn.danger{background:var(--flag);border-color:var(--flag);color:#fff}
+/* Sits right under the controls; sticks to the panel's bottom edge only when content runs long. */
+.pfoot{position:sticky;bottom:-30px;z-index:2;display:flex;align-items:center;gap:8px;margin:14px -18px 0;
+  padding:11px 18px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);background:var(--card)}
+.pstate{flex:1;margin:0;font-size:11.5px;color:var(--ink-3)}
+.pstate.dirty{color:var(--flag);font-weight:600}
+.subopt{display:flex;gap:7px;align-items:flex-start;font-size:12px;color:var(--ink-2);margin:-8px 0 16px;padding:0 2px;cursor:pointer}
+.subopt input{margin:2px 0 0;accent-color:var(--accent);cursor:pointer}
+.keepnote{margin:8px 0 0;padding:8px 10px;font-size:11.5px;border-radius:5px;background:var(--flag-soft);
+  color:var(--flag);border:1px solid rgba(166,87,46,.3)}
+.hint{margin:5px 0 0;font-size:11px;color:var(--ink-3)}
+
+/* selection */
+.cell .pk{display:none;position:absolute;top:5px;right:5px;width:12px;height:12px;border:1.5px solid var(--ink-3);
+  border-radius:3px;background:var(--card)}
+body.selecting .cell .pk{display:block}
+body.selecting .cell .dot{display:none}
+.cell.picked{border-color:var(--accent);box-shadow:0 0 0 1.5px var(--accent)}
+.cell.picked .pk{background:var(--accent);border-color:var(--accent)}
+.cell.picked .pk::after{content:"";position:absolute;left:3px;top:0;width:3px;height:7px;border:solid #fff;
+  border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* The count sits at the end of the name: bottom-right when it fits, on its own line when not. */
+.cell .tnm{display:flow-root}
+.cell .nctl{position:static;float:right;margin:2px 0 0 8px;line-height:1.3}
+.cell .nctl.nr{color:var(--flag);font-weight:600}
+/* section tabs and framework toolbar */
+.tabs{border-bottom:1px solid var(--rule);background:var(--card)}
+.twrap{max-width:1560px;margin:0 auto;padding:0 20px;display:flex;gap:24px;align-items:center}
+.tab{font:inherit;font-size:13.5px;font-weight:550;padding:12px 1px 10px;border:0;border-bottom:2px solid transparent;
+  background:transparent;color:var(--ink-3);cursor:pointer}
+.tab:hover{color:var(--ink)}
+.tab[aria-pressed=true]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.twrap .btn{padding:5px 11px}
+.field .flab{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+#bSelect{border-color:var(--accent);color:var(--accent)}
+#bSelect[aria-pressed=true]{background:var(--accent);color:#fff}
+html[data-theme=dark] #bSelect[aria-pressed=true]{color:#10151B}
+
+/* bulk scope mode band: sits under the toolbar and stays in view while you scroll */
+.modebar{position:sticky;top:var(--hh,64px);z-index:39;background:var(--accent-soft);
+  border-top:2px solid var(--accent);border-bottom:1px solid var(--accent)}
+.mwrap{max-width:1560px;margin:0 auto;padding:10px 20px 11px}
+.mtitle{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px}
+.mtitle b{font-size:13.5px;font-weight:650;color:var(--accent)}
+.mtitle span{font-size:12.5px;color:var(--ink-2)}
+.mrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bcount{font-size:13px;font-weight:650;margin-right:4px;min-width:84px}
+.bhid{font-size:11.5px;color:var(--flag)}
+.mrow .lnk{padding:4px 6px}
+.mrow .lnk:disabled{opacity:.45;cursor:default;background:transparent}
+
+/* dialog */
+.dlgwrap{position:fixed;inset:0;z-index:90;background:rgba(20,27,38,.32);display:flex;align-items:flex-start;
+  justify-content:center;padding:12vh 16px 16px;overflow-y:auto}
+html[data-theme=dark] .dlgwrap{background:rgba(0,0,0,.55)}
+.dbox{background:var(--card);border:1px solid var(--rule);border-radius:8px;box-shadow:0 18px 50px rgba(20,27,38,.22);
+  width:min(500px,100%);padding:18px 20px}
+.dbox h3{margin:0 0 12px;font-size:15px;font-weight:650;letter-spacing:-.01em;line-height:1.3}
+.dbody>p{margin:0 0 10px;font-size:12.5px;color:var(--ink-2)}
+.dfld{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.dchk{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;margin:12px 0 0;cursor:pointer}
+.dchk input{margin:2px 0 0;accent-color:var(--accent);cursor:pointer}
+.dchk small{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
+.dbody .dnote{margin:8px 0 0;font-size:11.5px;color:var(--ink-3)}
+.dbody .dnote:empty{display:none}
+.dwarn{margin:12px 0 0;padding:8px 10px;font-size:11.5px;border-radius:5px;background:var(--flag-soft);
+  color:var(--flag);border:1px solid rgba(166,87,46,.3)}
+.dacts2{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+
+/* list view */
+.lhead{margin-bottom:4px}
+.lsv.warn{color:var(--flag)}
+.lkeys{margin:0 0 14px;font-size:11.5px;color:var(--ink-3)}
+kbd{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:10.5px;padding:0 4px;border:1px solid var(--rule);
+  border-bottom-width:2px;border-radius:3px;background:var(--card);color:var(--ink-2)}
+.lgrp{border:1px solid var(--rule-2);border-radius:7px;background:var(--card);margin-bottom:14px;overflow:hidden}
+.lghead{display:flex;align-items:center;gap:12px;padding:9px 13px;background:var(--paper);border-bottom:1px solid var(--rule-2);flex-wrap:wrap}
+.lghead h3{margin:0;font-size:13px;font-weight:650}
+.lghead .ct{font-size:10px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.lghead .colbar{flex:0 0 120px;margin:0}
+.lrow{display:grid;grid-template-columns:72px minmax(190px,270px) minmax(0,1fr);column-gap:12px;
+  padding:10px 13px;border-bottom:1px solid var(--rule-2);align-items:start}
+.lrow:last-child{border-bottom:0}
+.lrow.sub .lname{padding-left:11px;border-left:2px solid var(--rule)}
+.lrow.na{background:repeating-linear-gradient(45deg,transparent,transparent 7px,rgba(127,127,127,.06) 7px,rgba(127,127,127,.06) 14px)}
+.lrow.picked{background:var(--accent-soft)}
+.lsel{display:none}
+.lsel input{margin:3px 0 0;accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
+body.selecting .lsel{display:block}
+body.selecting .lrow{grid-template-columns:22px 72px minmax(190px,270px) minmax(0,1fr);cursor:pointer}
+.lid{font-size:11px;color:var(--ink-3);padding-top:2px}
+.lrow[data-src=attack] .lid{color:var(--flag)}
+.lopen{font:inherit;font-size:13px;font-weight:600;text-align:left;border:0;background:transparent;padding:0;
+  color:var(--ink);cursor:pointer;line-height:1.3}
+.lopen:hover{color:var(--accent);text-decoration:underline}
+.lopen:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.lrow.na .lopen{color:var(--ink-3)}
+.lmeta{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:5px}
+.lmeta .pill{padding:2px 6px}
+.ltog{display:inline-flex;gap:4px;margin-left:4px}
+.pill.lnone{background:var(--sN);color:var(--ink-3)}
+.tog{font:inherit;font-size:11px;padding:2px 8px;border:1px solid var(--rule);border-radius:4px;background:var(--card);
+  color:var(--ink-2);cursor:pointer}
+.tog:hover{border-color:var(--ink-3)}
+.tog:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.tog[aria-pressed=true]{background:var(--flag-soft);border-color:var(--flag);color:var(--flag);font-weight:600}
+.lwork{min-width:0}
+.lctl{display:grid;grid-template-columns:minmax(120px,1.1fr) minmax(110px,.8fr) 132px minmax(150px,2fr) 22px;
+  gap:8px;align-items:start;margin-bottom:6px}
+.lcn{font-size:12.5px;font-weight:600;padding-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lctl input[type=text].lown{min-width:0;width:100%;font-size:12.5px;padding:5px 7px}
+.lscale{margin:0}
+.lscale button{padding:6px 0}
+.lctl textarea.lnote{min-height:31px;resize:none;padding:5px 7px;overflow:hidden;line-height:1.4}
+.lrm{border:0;background:transparent;color:var(--ink-3);cursor:pointer;font-size:15px;padding:5px 2px;line-height:1}
+.lrm:hover{color:var(--flag)}
+.lrm:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.lna input[type=text]{width:100%}
+.lkept{margin:6px 0 0;font-size:11.5px;color:var(--flag)}
+.lgap{margin:5px 0 0;font-size:12px;color:var(--flag)}
+.lwork .picker{margin:2px 0 4px}
+@media (max-width:980px){
+  .lrow,body.selecting .lrow{grid-template-columns:22px minmax(0,1fr)}
+  .lid,.lname{grid-column:2}
+  .lwork{grid-column:1/-1;margin-top:8px}
+  .lctl{grid-template-columns:minmax(0,1fr) 132px 22px}
+  .lcn{grid-column:1/-1}
+  .lctl textarea.lnote{grid-column:1/-1}
+}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -289,7 +428,7 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
     <div class="stat"><b id="kControls">0</b><span>Controls</span></div>
     <div class="stat"><b id="kMean">&mdash;</b><span>Mean score</span></div>
     <div class="stat"><b id="kGaps">0</b><span>Gaps</span></div>
-    <div class="stat"><b id="kNA">0</b><span>Out of scope</span></div>
+    <div class="stat"><b><i id="kNA" class="kv">0</i><button class="nrb" id="kNR" hidden></button></b><span>Out of scope</span></div>
     <button class="btn" id="bTheme" title="Toggle color theme" aria-label="Toggle color theme">Dark</button>
     <button class="btn" id="bLoad">Load</button>
     <button class="btn" id="bSave">Export JSON</button>
@@ -312,11 +451,22 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
 </div>
 <datalist id="ownerList"></datalist>
 
-<div class="toolbar">
-  <div class="seg" role="group" aria-label="View">
-    <button id="vMatrix" aria-pressed="true">Matrix</button>
-    <button id="vInv" aria-pressed="false">Control inventory</button>
-    <button id="vRep" aria-pressed="false">Report</button>
+<nav class="tabs" aria-label="Sections">
+  <div class="twrap">
+    <button class="tab" id="vFw" aria-pressed="true">Framework</button>
+    <button class="tab" id="vInv" aria-pressed="false">Control inventory</button>
+    <button class="tab" id="vRep" aria-pressed="false">Report</button>
+    <span class="spacer"></span>
+    <button class="btn" id="bClear">Reset</button>
+  </div>
+</nav>
+<div class="toolbar" id="fwBar">
+  <div class="field">
+    <span class="flab">View</span>
+    <div class="seg" role="group" aria-label="Framework view">
+      <button id="vMatrix" aria-pressed="true">Matrix</button>
+      <button id="vList" aria-pressed="false">List</button>
+    </div>
   </div>
   <div class="field">
     <label for="q">Find</label>
@@ -338,10 +488,30 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
       <option value="gap">Gaps (0&ndash;1)</option>
       <option value="covered">Covered (2&ndash;3)</option>
       <option value="na">Out of scope</option>
+      <option value="nanoreason">Out of scope, no rationale</option>
     </select>
   </div>
   <div class="spacer"></div>
-  <button class="btn" id="bClear">Reset</button>
+  <button class="btn" id="bSelect" aria-pressed="false">Bulk scope</button>
+</div>
+<div class="modebar" id="bulk" hidden>
+  <div class="mwrap">
+    <div class="mtitle">
+      <b>Bulk scope</b>
+      <span id="bHint"></span>
+    </div>
+    <div class="mrow">
+      <span class="bcount" id="bCount"></span>
+      <button class="lnk" id="bxAll">Select all shown</button>
+      <button class="lnk" id="bxClear">Clear selection</button>
+      <span class="bhid" id="bHidden"></span>
+      <span class="spacer"></span>
+      <button class="btn" id="bxExclude">Exclude from scope</button>
+      <button class="btn" id="bxReason">Add rationale</button>
+      <button class="btn" id="bxRestore">Restore to scope</button>
+      <button class="btn primary" id="bxDone">Done</button>
+    </div>
+  </div>
 </div>
 
 <main>
@@ -359,13 +529,14 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
     </div>
     <div class="matrix" id="matrix"></div>
   </div>
+  <div class="view" id="viewList"></div>
   <div class="view" id="viewInv"></div>
   <div class="view" id="viewRep"></div>
 </main>
 
 <footer class="appfoot">
   <div class="fwrap">
-    <p><b>F3 Coverage Assessment</b> v<span id="toolVer">1.0.0</span> &middot; Built by Andrew Cunningham &middot; Apache License 2.0</p>
+    <p><b>F3 Coverage Assessment</b> v<span id="toolVer">1.1.0</span> &middot; Built by Andrew Cunningham &middot; Apache License 2.0</p>
     <p>Framework content &copy; 2026 MITRE, licensed under the Apache License, Version 2.0, from the MITRE Center for Threat-Informed Defense. Technique data converted from MITRE's published F3 v1.1 STIX bundle.
     MITRE Fight Fraud Framework&trade;, MITRE F3&trade;, and MITRE ATT&amp;CK&reg; are trademarks of The MITRE Corporation. This tool is not affiliated with or endorsed by MITRE.</p>
   </div>
@@ -390,12 +561,16 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
     <label class="nonebox" id="pNABox">
       <input type="checkbox" id="pNA">
       <span>Not applicable / out of scope
-        <small>Excludes this technique from coverage math. Record the rationale below.</small></span>
+        <small>Excludes this technique from coverage math. Any controls recorded are kept but hidden.</small></span>
     </label>
     <div id="pNAReasonWrap" style="display:none;margin:-8px 0 16px">
-      <textarea id="pNAReason" placeholder="Why is this out of scope? e.g., no ATM channel, product not offered"></textarea>
+      <textarea id="pNAReason" placeholder="Rationale (optional). Why is this out of scope? e.g., no ATM channel, product not offered"></textarea>
+      <p class="hint">Exclusions without a rationale are flagged in the report.</p>
+      <p class="keepnote" id="pNAKeep" hidden></p>
     </div>
+    <label class="subopt" id="pNAAllBox" hidden><input type="checkbox" id="pNAAll" checked><span id="pNAAllText"></span></label>
 
+    <div id="pCtlSec">
     <p class="lab">Controls
       <button id="pGuideToggle" aria-expanded="false">Scoring guide</button></p>
     <div class="guide" id="pGuide">
@@ -414,12 +589,20 @@ input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border:1px solid va
       <div id="pCtls"></div>
       <button class="addctl" id="pAdd">+ Add control</button>
     </div>
+    </div>
+    <div class="pfoot">
+      <p class="pstate" id="pState" aria-live="polite"></p>
+      <button class="btn" id="pCancel">Cancel</button>
+      <button class="btn primary" id="pSave">Save</button>
+    </div>
 
     <p class="lab" style="margin-top:20px">Technique description</p>
     <p class="desc" id="pDesc"></p>
     <div class="meta" id="pMeta"></div>
   </div>
 </aside>
+
+<div class="dlgwrap" id="dlg" hidden></div>
 
 <script>
 const DATA = {"tactics":[{"shortname":"reconnaissance","name":"Reconnaissance","description":"The fraud actor's actions to gather information they can use to plan future operations, including both cyber intrusions and attempted fraud. \n\nReconnaissance consists of techniques that involve fraud actors actively or passively gathering information that can be used to support targeting. Such information may include details of the victim organization, infrastructure, or staff/personnel. This information can be leveraged by the fraud actor to aid in other phases of the fraud lifecycle, such as using gathered information to plan and execute Initial Access, to scope and prioritize post-compromise objectives, or to drive and lead further Reconnaissance efforts."},{"shortname":"resource-development","name":"Resource Development","description":"The fraud actor's actions to establish resources they can use to support both cyber and fraud activities. \n\nResource Development consists of techniques that involve fraud actors creating, purchasing, or compromising/stealing resources that can be used to support targeting. Such resources include infrastructure, accounts, or capabilities. These resources can be leveraged by the fraud actor to aid in other phases of the fraud lifecycle, such as using purchased domains to support Execution, email accounts for phishing as a part of Initial Access, or spoofing to help with Stealth."},{"shortname":"initial-access","name":"Initial Access","description":"The fraud actor's actions to gain a foothold in a selected environment.  \n\nInitial Access consists of techniques that use various entry vectors to gain their initial foothold within a selected environment. Techniques used to gain a foothold include targeted spearphishing and exploiting weaknesses in browsers. Footholds gained through initial access may allow for continued access, like compromise accounts and use of external remote services, or may be limited-use due to changing passwords."},{"shortname":"stealth","name":"Stealth","description":"The fraud actor is trying to hide and conceal fraudulent activity by appearing as normal user or business behavior.\n\nStealth consists of techniques that reduce the likelihood of detection by blending in with legitimate activity or minimizing observable indicators of fraud. These techniques are characterized by concealment behaviors such as obfuscation, impersonation, traffic shaping, or mimicking normal customer operations, without directly modifying security controls or monitoring systems. The goal is to remain indistinguishable from benign activity while leaving defensive systems operational and intact."},{"shortname":"defense-impairment","name":"Defense Impairment","description":"The fraud actor is trying to break or undermine security mechanisms, fraud controls, or customer safeguards, so defenders or victims cannot respond to fraudulent activity.\n\nDefense Impairment consists of techniques that degrade, disable, evade, or undermine the effectiveness and trustworthiness of security controls, fraud prevention systems, and customer-facing security features. This is characterized by direct interference with defensive technologies, operational processes, or user security controls. This may include disabling account alerts, suppressing notifications, modifying contact information, or bypassing authentication safeguards. The goal is to reduce the ability of organizations and victims to identify, prevent, or respond to fraud activity."},{"shortname":"positioning","name":"Positioning","description":"The fraud actor's actions in a selected environment, after initial access, to collect or manipulate data or otherwise prepare for execution. \n                   \nPositioning consists of techniques that involve fraud actors gathering sensitive information, altering account configurations, manipulating transaction parameters, or establishing conditions necessary for successful fraud operations. These preparatory activities enable fraud actors to maximize the value extracted during fraud execution or establish persistent access for future operations."},{"shortname":"execution","name":"Execution","description":"The fraud actor's actions to run malicious code or initiate fraudulent transactions that will convert stolen data to money. \n\nExecution consists of techniques that result in fraud actor\u2011controlled code or actions running on a local, remote, or transaction\u2011processing system. Techniques that run malicious code or automate actions are often paired with other tactics to achieve broader goals, such as exploring a network, manipulating applications, initiating unauthorized payments, or altering transaction data to support fraud. For example, a fraud actor might use a remote access tool to run a PowerShell script that performs Remote System Discovery and then launch scripts or bots that submit fraudulent transfers, modify payment instructions, or replay payment messages through compromised banking or merchant platforms."},{"shortname":"monetization","name":"Monetization","description":"The fraud actor's actions to convert assets, often stolen, into usable funds or value in their possession.\n\nFraud actors may convert fraudulently obtained funds or assets into a form they can utilize or transfer to their possession. Monetization consists of techniques that involve fraud actors liquidating stolen digital assets, transferring funds from compromised accounts, converting fraud proceeds into difficult-to-trace monetary instruments, or manipulating markets. These techniques represent the final stages of fraud operations where fraud actors secure their gains and attempt to obscure the transaction trail."}],"techniques":[{"id":"F1001","name":"3DS Bypass","description":"Fraud actors may exploit weaknesses in 3-Domain Secure authentication implementations to bypass additional security verification for card-not-present transactions. This may include deliberately providing incomplete cardholder information to cause authentication failures that result in transactions being processed without additional verification. Bypassing 3DS authentication allows fraud actors to conduct fraudulent transactions without completing the additional security challenges designed to prevent card-not-present fraud.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1001"},{"id":"F1002","name":"Abuse of Public-Facing API","description":"Fraud actors may exploit publicly available APIs intended for legitimate customer or partner use to facilitate fraud operations. This may include account enumeration, credential stuffing attacks, data scraping, or automated financial transaction fraud. Fraud actors often leverage compromised credentials, botnets, or custom scripts to generate high volumes of API requests that mimic legitimate traffic patterns.","tactics":["initial-access","execution","positioning"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1002"},{"id":"F1002.001","name":"Abuse of Public-Facing API: Mobile API Abuse","description":"Fraud actors may exploit mobile-specific APIs to conduct fraud operations. This may include using modified mobile applications, mobile device emulators, or custom scripts to generate fraudulent API calls that appear legitimate. Fraud actors target mobile APIs to bypass security controls designed for web-based access or to exploit mobile-specific vulnerabilities in authentication and authorization mechanisms.","tactics":["initial-access","execution","positioning"],"parent":"F1002","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1002.001"},{"id":"F1002.002","name":"Abuse of Public-Facing API: Web API Abuse","description":"Fraud actors may abuse web-based APIs exposed through websites or web applications to automate fraud operations. This may include leveraging botnets, proxy networks, or headless browsers to mimic legitimate web traffic while conducting credential stuffing, transaction fraud, or data exfiltration. Fraud actors exploit web APIs to bypass rate limiting, CAPTCHA controls, or other security mechanisms designed to prevent automated abuse.","tactics":["initial-access","execution","positioning"],"parent":"F1002","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1002.002"},{"id":"F1003","name":"Abuse SMS verification","description":"Fraud actors may abuse SMS verification and one-time-password (OTP) services to generate excessive messaging costs or facilitate toll\u2011fraud schemes, rather than to authenticate real users. In a common pattern, attackers script large numbers of account sign\u2011ups or login attempts that all trigger SMS verifications to premium\u2011rate or otherwise high\u2011tariff phone numbers they control, allowing them to collect a share of the inflated termination fees while the victim organization pays the messaging bill. \n\nAdversaries may also manipulate SMS routing by steering verification traffic through specific high\u2011cost international carriers or number ranges, disguising these as normal mobile destinations so that automated routing systems deliver the messages without suspicion. By driving sustained volumes of verification traffic into these expensive routes, attackers can rapidly increase the victim\u2019s telecom spend and monetize the difference between actual delivery cost and what the organization expects to pay for legitimate verification usage. \n\nThis technique focuses on cost and routing abuse of SMS verification itself, and is distinct from Multi-Factor Authenticaion Request Generation, which covers triggering MFA prompts or notifications to overwhelm or pressure vicitims into approving authenticaion attempts.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1003"},{"id":"F1004","name":"Access with Stolen Session Cookie","description":"Fraud actors may use stolen session cookies to gain unauthorized access to user accounts without requiring authentication credentials. Session cookies maintain user login state and may be obtained through phishing, malware, network interception, or data breaches. By replaying stolen session cookies, fraud actors can impersonate legitimate users and access accounts as long as the session remains valid.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1004"},{"id":"F1005","name":"Account Manipulation","description":"Fraud actors may modify account settings to facilitate fraud operations or maintain persistent access. This may include altering payment methods, changing contact information, modifying notification preferences, adjusting security settings, linking accounts, or adding users. . Fraud actors typically gain initial access through stolen credentials or system vulnerabilities, then make unauthorized changes to account configurations to support subsequent fraud activities or prevent detection.","tactics":["positioning","defense-impairment"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005"},{"id":"F1005.001","name":"Account Manipulation: Account Linking","description":"Fraud actors may link compromised accounts to accounts under their control to establish persistent access that survives credential resets. In online and mobile banking environments, fraud actors may link victim bank accounts to secondary credentials or profiles without the victim's knowledge. This technique allows fraud actors to maintain account access even after the victim changes primary authentication credentials.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.001"},{"id":"F1005.002","name":"Account Manipulation: Add Authorized User","description":"Fraud actors may add themselves or accomplices as authorized users or secondary signers on compromised accounts. Authorized users typically have permission to perform transactions and access account features on behalf of the primary account holder. This technique provides fraud actors with legitimate-appearing access to accounts and may be used to position access for monetization or to establish persistent access that appears authorized.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.002"},{"id":"F1005.003","name":"Account Manipulation: Add Beneficiary","description":"Fraud actors may add themselves or accounts under their control as beneficiaries on compromised financial accounts. Beneficiary designations determine who receives account assets or benefits after the account holder's death or under other specified conditions. This technique allows fraud actors to potentially receive account assets in the future or to establish fraudulent claims to account benefits.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.003"},{"id":"F1005.004","name":"Account Manipulation: Change Account Details","description":"Fraud actors may change account details such as PIN numbers, security questions, transaction limits, addresses, phone numbers, email address, or other account parameters. By modifying these details, fraud actors can reduce security controls, increase their operational capabilities, or prevent legitimate users from accessing or recovering accounts. This may include changing knowledge-based authentication answers or adjusting account restrictions.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.004"},{"id":"F1005.005","name":"Account Manipulation: Change E-Delivery or Notification Settings","description":"Fraud actors may change electronic delivery or notification settings to prevent account holders from detecting suspicious account activity. By disabling email alerts, SMS notifications, or other notification mechanisms, fraud actors can conduct fraudulent transactions or account modifications without triggering alerts that would otherwise notify the legitimate account owner.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.005"},{"id":"F1005.006","name":"Account Manipulation: Change of Payment Details","description":"Fraud actors may alter stored payment or payout details in compromised customer, merchant, or vendor accounts to redirect non\u2011payroll funds to accounts or instruments they control. This can include changing bank information for vendor payments or customer refunds, updating stored cards or digital wallets used for billing, or adding new payment methods to enable unauthorized purchases and withdrawals, while leaving payroll processes untouched.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.006"},{"id":"F1005.007","name":"Account Manipulation: Enable Account Features","description":"Fraud actors may enable additional account features that legitimate account holders did not intend to activate. This may include increasing transaction limits, enabling international transactions, activating overdraft protection, or enabling other features that facilitate unauthorized financial activities. By expanding account capabilities, fraud actors increase their ability to monetize compromised accounts.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.007"},{"id":"F1005.008","name":"Account Manipulation: Update Call Receiving Device","description":"Fraud actors may add devices under their control to victim accounts to intercept phone calls intended for the legitimate account holder. This may include adding devices to cloud account profiles such as Apple ID or Microsoft accounts. By intercepting phone calls, fraud actors can receive authentication codes sent via voice calls, intercept customer service callbacks, or monitor communication related to account security.","tactics":["positioning","defense-impairment"],"parent":"F1005","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1005.008"},{"id":"F1006","name":"Account Takeover","description":"Fraud actors may gain unauthorized access and control of a customer\u2019s bank or payment account on a financial platform or service. This typically involves compromising the account used to hold and move funds\u2014such as online banking, card\u2011issuing, or digital wallet accounts\u2014rather than general user or application accounts covered under Compromise Accounts.\n\nFraud actors may achieve bank account takeover by using stolen credentials, exploiting system vulnerabilities, conducting phishing attacks, bypassing MFA, or leveraging credential stuffing with previously breached credentials. Once access is obtained, they can change contact and security details, add or modify payees, redirect deposits or payouts, initiate unauthorized transfers and card\u2011not\u2011present transactions, or extract sensitive financial data that supports additional fraud against the customer or institution.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1006"},{"id":"F1006.001","name":"Account Takeover: Exposed API Key","description":"Fraudsters may take over accounts by obtaining exposed API keys that are intended to authorize programmatic access to financial services. An exposed key can allow unauthorized interaction with payment platforms, enabling access to account data, manipulation of payment flows, and initiation of illicit transactions without traditional interactive login.\n\nAPI keys may be exposed through insecure code repositories, plaintext configuration files, shared code snippets, or targeted phishing of developers and technical staff. Once obtained, fraudsters can use the key to retrieve transaction and customer information, create or modify transactions and refunds for their own benefit, alter payment configuration to reroute future funds, or harvest data that supports follow\u2011on phishing or fraud campaigns.","tactics":["initial-access"],"parent":"F1006","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1006.001"},{"id":"F1006.002","name":"Account Takeover: Exposed Login Credential","description":"Fraudsters may gain control of accounts by using exposed login credentials, such as usernames and passwords leaked or stolen from other sources. Using these credentials, they authenticate directly to payment or account portals and assume the identity of the legitimate user, often without triggering additional verification if passwords are reused or multifactor controls are weak.\n\nLogin credentials can be obtained via large\u2011scale data breaches, credential\u2011stuffing lists, phishing campaigns, or keylogging malware. After gaining access, fraudsters may change routing details or payout instructions, initiate withdrawals or refunds, view and exfiltrate sensitive customer data, adjust billing or invoicing settings to redirect future payments, or use the compromised account as infrastructure for additional fraud schemes.","tactics":["initial-access"],"parent":"F1006","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1006.002"},{"id":"F1006.003","name":"Account Takeover: Password Reset","description":"Fraudsters may seize control of accounts by abusing password reset and account recovery mechanisms. By compromising a victim\u2019s email account or intercepting reset links and one\u2011time codes, they can initiate and complete password reset flows without the legitimate user\u2019s knowledge. Once the reset is successful, fraudsters establish new credentials under their control, lock the victim out of the account, and can freely modify settings, payment details, or perform unauthorized transactions.","tactics":["initial-access"],"parent":"F1006","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1006.003"},{"id":"F1007","name":"Adversary-in-the-Browser","description":"Fraud actors may use malware or malicious browser components to intercept, monitor, or manipulate web browser activity and transactions. This may include injecting malicious code into browser processes, deploying malicious browser extensions, or using DLL injection to compromise browser operations. Adversary-in-the-browser techniques allow real-time interception and modification of web traffic, including credential capture and transaction manipulation.","tactics":["initial-access","positioning","execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1007"},{"id":"F1007.001","name":"Adversary-in-the-Browser: DLL Injection","description":"Fraud actors may inject malicious dynamic-link libraries into legitimate browser processes to intercept and manipulate web traffic. Injected DLLs can capture credentials, modify displayed content, intercept form data, or manipulate financial transactions in real-time. This technique allows fraud actors to bypass browser security controls and operate within the context of trusted browser processes.","tactics":["initial-access","positioning","execution"],"parent":"F1007","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1007.001"},{"id":"F1007.002","name":"Adversary-in-the-Browser: Malicious Browser Extension","description":"Fraud actors may deploy malicious browser extensions that appear legitimate but contain hidden functionality to steal credentials or intercept financial transactions. Malicious extensions can monitor web activity, capture form inputs including payment information, modify displayed content, or inject malicious scripts into visited web pages. Users may be deceived into installing these extensions through social engineering or by compromising legitimate extension distribution channels.","tactics":["initial-access","positioning","execution"],"parent":"F1007","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1007.002"},{"id":"F1007.003","name":"Adversary-in-the-Browser: Malicious JavaScript Injection","description":"Fraud actors may inject malicious JavaScript into legitimate web pages to intercept credentials, capture payment information, or manipulate financial transactions. This may be accomplished through compromising web servers, exploiting cross-site scripting vulnerabilities, or using browser-based malware to modify page content before rendering. Injected JavaScript operates within the security context of the legitimate website, making detection more difficult.","tactics":["initial-access","positioning","execution"],"parent":"F1007","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1007.003"},{"id":"F1008","name":"ATM Manipulation","description":"Fraud actors may manipulate ATM hardware or software to steal financial data or dispense unauthorized cash. This may include installing malicious software, exploiting vulnerabilities, connecting unauthorized hardware devices, or physically manipulating ATM components. ATM manipulation techniques allow fraud actors to capture card data and PINs, dispense cash without proper authorization, or disable security controls.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1008"},{"id":"F1008.001","name":"ATM Manipulation: ATM Hardware Manipulation","description":"Fraud actors may manipulate ATM hardware to gain unauthorized access or control. This may include installing black box devices that connect to internal ATM systems, modifying card readers to capture card data, or physically accessing internal communication interfaces. Hardware manipulation techniques such as ATM black boxing involve connecting unauthorized devices to the ATM's internal systems to send fraudulent dispense commands.","tactics":["execution"],"parent":"F1008","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1008.001"},{"id":"F1008.002","name":"ATM Manipulation: ATM Software Manipulation","description":"Fraud actors may manipulate ATM software to gain unauthorized access to sensitive financial data or conduct unauthorized transactions. This may include installing malicious software, exploiting software vulnerabilities, or modifying ATM operating system configurations. Software manipulation can allow fraud actors to capture card data and PINs, dispense cash without authorization, or disable security controls.","tactics":["execution"],"parent":"F1008","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1008.002"},{"id":"F1009","name":"Bank Deposit","description":"Fraud actors may exploit bank deposit mechanisms to introduce fraudulent funds, kite checks, or launder money. This may include depositing counterfeit checks, manipulating mobile deposit systems, exploiting deposit timing vulnerabilities, or using stolen instruments. Bank deposit fraud techniques exploit the delay between deposit and verification or clearing of deposited instruments.","tactics":["execution","positioning"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1009"},{"id":"F1009.001","name":"Bank Deposit: ATM Deposit","description":"Fraud actors may exploit ATM deposit functions to introduce fraudulent checks or cash into accounts. This may include depositing counterfeit checks, altered checks, or stolen instruments through ATMs that process deposits with limited immediate verification. ATM deposits may provide longer processing times before fraud is detected compared to teller deposits.","tactics":["execution","positioning"],"parent":"F1009","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1009.001"},{"id":"F1009.002","name":"Bank Deposit: Mobile Deposit","description":"Fraud actors may exploit mobile deposit capabilities to deposit fraudulent checks or repeatedly deposit the same check. This may include depositing counterfeit checks, altered checks, or exploiting check processing delays to deposit the same check through multiple channels before fraud is detected. Mobile deposit systems may have reduced verification compared to in-person deposits.","tactics":["execution","positioning"],"parent":"F1009","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1009.002"},{"id":"F1009.003","name":"Bank Deposit: Night Deposit","description":"Fraud actors may exploit night deposit services to introduce fraudulent deposits with delayed verification. Night deposits are processed the following business day, providing additional time for fraud actors to exploit the float period before deposits are verified. This may include depositing counterfeit checks, stolen checks, or altered instruments.","tactics":["execution","positioning"],"parent":"F1009","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1009.003"},{"id":"F1009.004","name":"Bank Deposit: Test Deposit","description":"Fraud actors may abuse test deposit mechanisms used for account verification to gather account information or conduct micro-deposit fraud. Account linking services often send small test deposits that users must verify, and fraud actors may intercept these deposits to confirm account control or conduct account enumeration. This technique may also be used to identify active accounts for targeting.","tactics":["execution","positioning"],"parent":"F1009","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1009.004"},{"id":"F1010","name":"Buy Money Order","description":"Fraud actors may purchase money orders with stolen payment methods or fraudulent funds to convert illicit proceeds into more anonymous monetary instruments. Money orders can be cashed at various locations, are difficult to trace back to the purchaser, and can be used as payment instruments with reduced fraud detection compared to electronic payments.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1010"},{"id":"F1011","name":"Card Dump Capture","description":"Fraud actors may capture payment card magnetic stripe data, EMV chip data, or card details from various sources. This may include using skimming devices at point-of-sale terminals, ATMs, or fuel pumps, compromising payment processing systems, or conducting memory scraping attacks against POS systems. Captured card data can be used to create counterfeit cards, conduct card-not-present fraud, or be sold to other malicious fraud actors.","tactics":["positioning","reconnaissance"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1011"},{"id":"F1012","name":"Card Testing","description":"Fraud actors may test stolen payment card credentials by conducting small transactions to determine if cards are valid and active. This may include making small purchases, authorization attempts without completing transactions, or using automated testing services. Successful card tests confirm which stolen credentials remain valid for use in larger fraudulent transactions or for sale to other malicious fraud actors.","tactics":["positioning"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1012"},{"id":"F1013","name":"Change Payroll Details","description":"Fraud actors may alter payroll or HR system settings so that an employee\u2019s salary or wage payments are redirected to accounts they control. This typically involves changing direct\u2011deposit account and routing numbers, updating payee details, or modifying payroll profiles inside dedicated payroll/HR platforms, resulting in ongoing diversion of regular paycheck deposits away from the legitimate employee.","tactics":["positioning"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1013"},{"id":"F1014","name":"Check Fraud","description":"Fraud Actors may illicitly obtain funds by abusing paper or digital checks tied to existing accounts. This can involve stealing checks, forging signatures or endorsements, issuing counterfeit or unauthorized checks, altering payee or amount details, or \u201cwashing\u201d and reusing legitimate checks, all with the goal of cashing out or redirecting funds without the account holder\u2019s consent.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1014"},{"id":"F1015","name":"Churning","description":"Churning fraud occurs when fraud actors repeatedly use stolen payment card information to conduct transactions until the card limit is reached or the account balance is depleted, often before detection or card deactivation.\n\nFraud actors typically begin with a low\u2011value test transaction to confirm that the card details are valid and active, then rapidly execute a series of higher\u2011value transactions. These transactions often involve card\u2011not\u2011present channels such as eCommerce, digital goods and services, or purchases that can be quickly resold, including gift cards, prepaid instruments, or other easily liquidated assets.\n\nThe primary objectives of churning fraud are to quickly monetize stolen card data before it is revoked, acquire goods or assets that can be anonymized or converted into cash with minimal traceability, and maximize financial gain from each compromised card before fraud controls or victims detect the activity.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1015"},{"id":"F1016","name":"Compromise Payment Gateway","description":"Fraudsters may gain unauthorized access to payment gateway platforms that process online transactions, allowing them to interfere with how payments are routed and recorded. Once embedded in a gateway environment, they can redirect transactions to accounts they control, alter transaction details to siphon funds, capture payment card and customer data, or disrupt normal settlement processes.\n\nCompromise of a payment gateway can occur through exploitation of software vulnerabilities, use of stolen or weak credentials, phishing of gateway or merchant staff, or deployment of malware that intercepts traffic between merchants and the gateway. Fraud actors often focus on weaknesses in the integration between a merchant\u2019s website and the gateway, or on misconfigurations and security gaps within the gateway\u2019s own infrastructure, to maintain persistent and covert access.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1016"},{"id":"F1017","name":"Conversion to Physical Monetary Instruments","description":"Fraud actors may turn digital or account\u2011based balances into physical money or negotiable instruments to complete cash\u2011out. By moving value into cash or cash\u2011like forms, they reduce traceability within electronic payment systems and gain flexibility to spend, transport, or further launder proceeds.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1017"},{"id":"F1017.001","name":"Conversion to Physical Monetary Instruments: Cash","description":"Fraud actors may withdraw cash directly from compromised accounts using ATMs, in\u2011branch teller withdrawals, or cash\u2011back at point\u2011of\u2011sale. Cash withdrawals provide immediate access to funds and can be coordinated across multiple mules, cards, or locations to rapidly deplete balances before controls or fraud\u2011detection mechanisms respond.","tactics":["monetization"],"parent":"F1017","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1017.001"},{"id":"F1017.002","name":"Conversion to Physical Monetary Instruments: Cashier's Check","description":"Fraud actors may request cashier\u2019s checks funded from compromised accounts and payable to themselves, accomplices, or front entities. Once issued, cashier\u2019s checks can be deposited, cashed, or used to purchase high\u2011value goods, providing a semi\u2011anonymous way to move and store value outside the original account.","tactics":["monetization"],"parent":"F1017","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1017.002"},{"id":"F1017.003","name":"Conversion to Physical Monetary Instruments: Money Order","description":"Fraud actors may purchase money orders using funds drawn from compromised accounts, including via debit card, bank counter transactions, or other payment instruments. Money orders can then be cashed, resold, or used for payments (such as rent or goods), enabling further layering and obscuring the link to the original compromised account.","tactics":["monetization"],"parent":"F1017","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1017.003"},{"id":"F1018","name":"Convert to Cryptocurrency","description":"Fraudsters may convert stolen or illicit funds into cryptocurrencies such as Bitcoin or Ethereum to obscure the origin and movement of value. Cryptocurrency transfers leverage pseudonymous addresses and cross\u2011platform exchanges, making it more difficult for traditional financial monitoring and investigative processes to trace or recover the underlying funds.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1018"},{"id":"F1019","name":"Create Counterfeit Card","description":"Fraudsters may manufacture physical payment cards using stolen or fabricated card data in order to conduct in\u2011person or card\u2011present transactions. This includes encoding compromised account details onto blank card stock or cloning existing cards so that fraudulent purchases, ATM withdrawals, or cash\u2011back transactions appear to originate from a legitimate debit or credit card.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1019"},{"id":"F1020","name":"Create Fake Materials","description":"Fraud actors may create fraudulent materials to deceive victims or establish false legitimacy. This may include creating fake websites, fraudulent documents, counterfeit identification, or other materials designed to appear legitimate. Fake materials are used to support various fraud operations including phishing, identity fraud, business email compromise, or establishing fraudulent business entities.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1020"},{"id":"F1020.001","name":"Create Fake Materials: Fake Documents","description":"Fraud actors may forge documents and supporting artifacts to falsify identities, deceive authorities, or fabricate evidence in support of fraud operations. This can include creating or altering identification cards, passports, financial statements, or shipping-related evidence such as tracking numbers to bypass verification processes, gain access to restricted services, or legitimize fraudulent transactions. Commonly faked documents include bank statements, paychecks, government-issued IDs, Social Security cards, insurance policies, invoices, business licenses, which may be either fully counterfeit or subtly modified to evade detection.","tactics":["resource-development"],"parent":"F1020","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1020.001"},{"id":"F1020.002","name":"Create Fake Materials: Fake Website","description":"Fraud actors may create fraudulent e-commerce websites that mimic legitimate retailers to capture payment information or steal credentials. This may include replicating the design, layout, and functionality of trusted sites while hosting them on attacker-controlled infrastructure, often using lookalike domains (e.g., typosquatting) to appear legitimate. Fraud actors may advertise products with no intention of delivery to harvest payment card information during checkout.\n\nFraud actors may promote these sites through phishing campaigns, malicious advertisements, search engine optimization, or social media to drive victim traffic. Fraud actors use these sites to collect credentials, payment details, or personal data, redirect transactions, or facilitate additional fraudulent activity.","tactics":["resource-development"],"parent":"F1020","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1020.002"},{"id":"F1021","name":"Create Fraudulent Merchant Account","description":"Fraud actors may create fraudulent merchant accounts with payment processors or acquiring banks to obtain legitimate\u2011appearing payment acceptance capabilities. These accounts are often opened using stolen or fabricated identity information, shell businesses, or front companies to bypass onboarding and KYC controls.\n\nOnce established, fraudulent merchant accounts allow fraud actors to process payments for non\u2011existent or sham goods and services, run payment card testing at scale, or move and cycle funds as part of broader fraud schemes. By mimicking the behavior and documentation of real merchants, these accounts provide a controlled point for receiving card payments and disbursing proceeds, while making downstream transactions appear to originate from a legitimate business.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1021"},{"id":"F1022","name":"Delete Relevant Emails","description":"Fraudsters may delete emails that could alert victims or investigators to ongoing fraudulent activity. This can include removing copies of messages sent from the victim\u2019s account, replies from recipients, security alerts about unusual login or transaction activity, or other notifications that would reveal account changes, preventing the legitimate user from noticing and responding to the compromise","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1022"},{"id":"F1023","name":"Device Fingerprint Spoofing","description":"Fraud actors employ device fingerprint spoofing to mask their true identities and evade detection by security systems. By manipulating various attributes of their device's fingerprint, such as browser settings, operating system details, and hardware configurations, they can make their devices appear as different, legitimate ones. This technique enables fraud actors to bypass security measures that rely on device identification for authentication or fraud detection, allowing them to carry out illicit activities while remaining undetected.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1023"},{"id":"F1024","name":"Dispute Legitimate Transaction","description":"Fraud Actors or complicit consumers may intentionally dispute legitimate card purchases or payment transactions to obtain unwarranted credits or refunds from a financial institution. By falsely claiming that a transaction was unauthorized, fraudulent, or that goods or services were not received, they seek to reverse charges while retaining the benefit of the original purchase.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1024"},{"id":"F1025","name":"Electronic Funds Transfer","description":"Fraud actors may use electronic funds transfer mechanisms to move money out of compromised accounts into destinations they control. This activity can leverage traditional banking rails, regional payment systems, or peer\u2011to\u2011peer platforms to rapidly cash out or further obscure stolen funds.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1025"},{"id":"F1025.001","name":"Electronic Funds Transfer: Peer-to-Peer Transfer","description":"Fraud actors may use regional payment systems, such as ACH or SEPA, to schedule push payments, credits, or other electronic transfers from victim accounts to accounts they or their accomplices control. These rails can support repeated or batched withdrawals, enabling lower\u2011value but high\u2011volume monetization that may initially blend into normal transaction patterns.","tactics":["monetization"],"parent":"F1025","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1025.001"},{"id":"F1025.002","name":"Electronic Funds Transfer: Regional Payment Rail","description":"Fraudsters may convert compromised account balances into physical funds by obtaining cash or cash\u2011like instruments, including ATM withdrawals, cashier\u2019s checks, money orders, or similar negotiable instruments. Physical withdrawals allow immediate spending or further layering of funds outside of the original financial channel","tactics":["monetization"],"parent":"F1025","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1025.002"},{"id":"F1025.003","name":"Electronic Funds Transfer: Wire Transfer","description":"Fraud actors may initiate domestic or international wire transfers from compromised accounts to mule or controlled accounts. Wire transfers can move large values quickly and, once executed, are often difficult or slow to reverse, providing an efficient channel for high\u2011value cash\u2011out.","tactics":["monetization"],"parent":"F1025","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1025.003"},{"id":"F1026","name":"Exploitation of Gambling Platforms","description":"Fraud actors may exploit gambling platforms as a channel to convert illicit value into seemingly legitimate funds and to move or disguise the proceeds of fraud. They may create or use accounts, often opened with stolen or fabricated identities, to deposit illicit funds, place low\u2011risk or offsetting bets, and then withdraw balances as \u201cwinnings\u201d to other accounts under their control. They may also exploit bonus structures, loyalty rewards, or promotional credits to generate additional value, or conduct arbitrage across multiple platforms to turn promotional or gaming flows into profit. \n\nBy routing funds through gambling platforms and generating complex patterns of bets, transfers, and payouts, actors aim to obscure the source of the money and make subsequent withdrawals appear consistent with normal gambling activity, supporting monetization and money\u2011laundering objectives rather than the initial execution of fraud.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1026"},{"id":"F1027","name":"Falsify Business Documents","description":"Fraud actors may create or alter business documents to support fraud schemes or deceive stakeholders. This may include creating fake invoices, forging business licenses, falsifying financial statements, or creating fraudulent corporate documentation. Falsified documents may be used to establish fraudulent business entities, support business email compromise schemes, obtain financing, or deceive partners and customers.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1027"},{"id":"F1028","name":"Fradulent Purchasing","description":"Fraudulent purchasing occurs when fraud actors use stolen payment card data, compromised or fraudulent accounts, or money laundering channels to buy goods or services. These purchases are used to convert illicit funds into seemingly legitimate assets, avoid scrutiny by financial institutions, or cash out stolen value into clean money.\n\nFraud actors may carry out fraudulent purchases using stolen credit card details or by abusing compromised financial accounts on e\u2011commerce platforms, payment processors (for example, gateway providers), or brick\u2011and\u2011mortar merchants with online payment capabilities. They may prioritize high\u2011value goods that can be quickly resold, or convert funds into cryptocurrencies or gift cards that provide liquid, harder\u2011to\u2011trace value.\n\nExamples of fraudulent purchasing include: buying luxury items with stolen card information and reselling them for cash; ordering goods or services to drop addresses where they or associates can safely retrieve the items; and using illegitimately obtained funds to purchase gift cards or digital assets that have anonymous resale value or can be redeemed without exposing the buyer\u2019s identity.\n\nThe primary objectives of fraudulent purchasing are to liquidate stolen financial assets before detection and account shutdown, launder money by transforming illicit funds into physical goods that can be resold for \u201cclean\u201d proceeds, and obtain goods or services for personal use or profit without any intention of legitimate payment.","tactics":["execution","monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1028"},{"id":"F1029","name":"Gather Customer Information","description":"Fraud actors may gather information about existing or prospective customers to support targeted fraud operations and social\u2011engineering attacks against financial institutions, merchants, or platforms. This can include collecting customer identity details (such as names, addresses, dates of birth, government identifiers), account and card data, contact information, relationship data (for example, employers, family members, or business associations), and behavioral or preference information (such as typical spending patterns or channel usage).\n\nCustomer information may be sourced from data breaches, underground markets, public records, social media, third\u2011party data brokers, compromised internal systems, or direct social\u2011engineering of customers and staff. Aggregated customer data enables more convincing impersonation, tailored fraud scenarios, and higher\u2011success attacks such as account takeover, new\u2011account fraud, mule recruitment, and highly targeted social\u2011engineering campaigns against both customers and the institutions that serve them.","tactics":["reconnaissance"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1029"},{"id":"F1030","name":"Geolocation Spoofing","description":"Fraud actors may falsify geographic location information to bypass location-based security controls or access restricted services. This may include using VPNs, proxy servers, GPS spoofing applications, or other techniques to mask true location. Location spoofing allows fraud actors to access geo-restricted content, bypass location-based fraud detection, or hide their true location during fraud operations.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1030"},{"id":"F1031","name":"Impersonate Account Holder","description":"Fraud actors may impersonate legitimate account holders when interacting with financial institutions or service providers. This may include using stolen personal information to answer authentication questions, conducting social engineering attacks while impersonating victims, or using compromised identity information to convince institutions to grant access or conduct transactions. Successful impersonation can bypass identity verification controls.","tactics":["initial-access","stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1031"},{"id":"F1032","name":"Impersonate Official","description":"Fraud actors may impersonate officials such as bank representatives, law enforcement officers, government agents, or other authority figures to manipulate victims. By impersonating officials, fraud actors leverage the trust and authority associated with these positions to convince victims to provide sensitive information, authorize transactions, or take actions that facilitate fraud. Impersonation may occur through phone calls, emails, or in-person interactions.","tactics":["initial-access","stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1032"},{"id":"F1033","name":"Insider Access Abuse","description":"Fraud actors may abuse legitimate access privileges to conduct fraud operations. This may include malicious insiders, compromised insiders, or exploitation of excessive access privileges by authorized users. Insider access provides fraud actors with legitimate credentials and authorization to access systems, data, or conduct transactions, making detection more difficult than external attacks.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1033"},{"id":"F1034","name":"Interactive Voice Response Mapping","description":"Fraud actors may interact with interactive voice response systems to understand call flows, authentication mechanisms, or available functions. By mapping IVR systems, fraud actors can identify opportunities for fraud, understand authentication requirements, or develop strategies for social engineering attacks against customer service representatives. IVR discovery may be automated or conducted manually to gather intelligence for fraud operations.","tactics":["reconnaissance"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1034"},{"id":"F1035","name":"Mail Theft","description":"Fraud actors may steal physical mail to obtain financial information, payment cards, checks, or identity documents. Mail theft provides access to statements, new payment cards, checks, tax documents, or other financial materials that can be used for fraud. Stolen mail may be intercepted from mailboxes, during postal delivery, or from mail processing facilities.","tactics":["positioning","reconnaissance"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1035"},{"id":"F1036","name":"New Vendor Setup","description":"Fraud actors may pretend to be a new vendor or supplier to trick organizations into directing payments to fraudulent accounts. New vendor setup can be initiated through fake invoices, requests for adding a new payee, banking information change forms, or urgent payment requests that pressure staff to bypass normal verification steps. Once the bogus vendor profile is established in accounts payable or procurement systems, fraud actors can submit additional invoices, alter payment details, or reroute legitimate payments intended for real vendors to accounts they control.","tactics":["positioning","stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1036"},{"id":"F1037","name":"NFC Payment","description":"Fraud actors exploit NFC (Near Field Communication) payments by using stolen or cloned NFC-enabled cards or mobile devices to make unauthorized transactions. They may intercept or manipulate NFC signals to initiate payments without the legitimate cardholder's knowledge or consent. By leveraging NFC technology, fraud actors can quickly and discreetly conduct fraudulent transactions, often evading traditional security measures such as PIN verification or signature requirements, leading to financial losses for both consumers and businesses.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1037"},{"id":"F1038","name":"PAN/CVV Generation","description":"Fraud actors use PAN/CVV Generators to create valid credit card numbers (PANs) along with their corresponding Card Verification Values (CVVs), allowing fraud actors to bypass security measures and make unauthorized purchases. By generating PANs and CVVs, fraud actors can create counterfeit credit cards or conduct card-not-present transactions without physically possessing the victim's card.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1038"},{"id":"F1039","name":"PaReq Manipulation","description":"Fraud actors exploit Payment Authentication Requests (PaReqs) by manipulating the data within these requests to bypass security measures and gain unauthorized access to sensitive information or transactions. By altering the parameters or contents of PaReqs, they can trick payment systems into approving fraudulent transactions without proper authentication. This manipulation helps fraud actors evade detection by exploiting vulnerabilities in payment processing systems and bypassing security checks designed to prevent unauthorized access or fraudulent transactions.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1039"},{"id":"F1040","name":"Phone Number Spoofing","description":"Fraud actors may manipulate caller ID information so that outgoing calls appear to originate from a different phone number than the one actually used. This enables them to impersonate trusted organizations or ordinary customers in order to bypass call\u2011screening controls, establish credibility, and support social engineering or other fraudulent activity.","tactics":["stealth","reconnaissance","initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1040"},{"id":"F1040.001","name":"Phone Number Spoofing: Customer Phone Number Spoofing","description":"Fraud actors may spoof a phone number that appears to belong to a legitimate customer or other ordinary individual when calling financial institutions or other official entities. By presenting themselves as the account holder from a plausible personal number, they attempt to pass identity verification, obtain confidential information about the customer, or convince staff to change account details, reset credentials, or otherwise grant access that facilitates downstream fraud like Impersonate Account Holder.","tactics":["stealth","reconnaissance","initial-access"],"parent":"F1040","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1040.001"},{"id":"F1040.002","name":"Phone Number Spoofing: Official Phone Number Spoofing","description":"Fraud actors may spoof an official phone number associated with a trusted organization, such as a bank, government agency, or law enforcement office, when calling victims. By making the call appear to come from a recognized institution\u2019s published number, they increase the likelihood that targets will trust the caller, disclose sensitive information, or perform high\u2011risk actions such as approving transactions or granting account access.","tactics":["stealth","reconnaissance","initial-access"],"parent":"F1040","isSub":true,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1040.002"},{"id":"F1041","name":"PIN-code Peeking","description":"Fraud actors observe or obtain personal identification numbers (PINs). Use of hidden cameras, skimming devices, or other covert methods to capture PINs at ATMs, point-of-sale terminals, or other PIN-entry locations.\n\nObtained PIN numbers used with other stolen information to compromise the victim's accounts or conduct fraudulent transactions.","tactics":["initial-access","reconnaissance"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1041"},{"id":"F1042","name":"Reactivate Account","description":"Fraud actors target inactive bank accounts because they are less likely to be monitored closely by the account holder or financial institution. They may attempt to reactivate the bank account through social engineering or by exploiting loopholes in the bank's security procedures. Once reactivated, they can use the account to launder money, deposit counterfeit checks, or engage in other fraudulent activities, taking advantage of the perceived lack of scrutiny on inactive accounts.","tactics":["positioning","initial-access"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1042"},{"id":"F1043","name":"Reversal of Transaction","description":"Fraud actors exploit the Reversal of Operation by initially conducting a legitimate transaction, such as purchasing goods or services. After the transaction is complete and the funds have been transferred, they then reverse the transaction, claiming it was unauthorized or fraudulent. This technique may allow them to obtain the goods or services without actually paying for them, effectively evading detection and potentially causing financial loss to the legitimate party involved.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1043"},{"id":"F1044","name":"Scheduled Transfer","description":"Fraud actors use scheduled transfers to systematically move funds out of compromised accounts at predefined intervals. By creating or hijacking recurring payment instructions within online banking or payment services, they can quietly redirect money to accounts they control or to intermediaries that help conceal the origin of the funds.\n\nFraud actors may gain access to online banking or payment service accounts and configure new standing orders or modify existing ones to send funds to external destinations. These transfers are typically timed and sized to resemble normal business activity, helping them evade detection while routing money through shell entities, mule accounts, or cryptocurrency services as part of the laundering process.","tactics":["execution"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1044"},{"id":"F1045","name":"Structuring","description":"Fraud actors may structure transactions or account activity by breaking up large movements of funds, spreading activity across multiple accounts, or using different locations and channels to avoid triggering fraud controls and regulatory reporting thresholds. By parcelling deposits, withdrawals, or transfers into smaller amounts that fall below Currency Transaction Report (CTR) or Suspicious Activity Report (SAR) triggers, or by distributing activity over time and across institutions, they aim to keep illicit flows appearing routine and prevent automated systems or investigators from detecting the underlying money laundering or fraud.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1045"},{"id":"F1046","name":"Test Payment Thresholds","description":"Fraud actors may perform small, low\u2011value \u201ctest\u201d transactions to verify that stolen or compromised payment instruments can be successfully used before attempting larger fraud. In these tests, they confirm details such as whether the card or account is open, has not been blocked, passes authorization checks (for example, AVS/CVV or 3\u2011D Secure), and can complete online or card\u2011not\u2011present purchases without triggering strong controls. Successful tests indicate that a card or account is likely to support higher\u2011value charges or cash\u2011out attempts, allowing fraud actors to prioritize the most viable instruments for large\u2011scale fraudulent transactions or broader card\u2011testing campaigns.","tactics":["positioning"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1046"},{"id":"F1047","name":"Transfer of funds","description":"Fraud actors may initiate unauthorized bank transfers to move funds from compromised accounts. This may include wire transfers, ACH transfers, peer-to-peer payment transfers, or other electronic fund transfer mechanisms. Fraud actors typically gain access through stolen credentials, compromised sessions, or by manipulating account holders through social engineering before initiating transfers to accounts under their control.","tactics":["monetization"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1047"},{"id":"F1048","name":"Use Virtual Cards","description":"Fraud actors use virtual cards to facilitate online fraud because they provide flexibility, anonymity, and rapid issuance for card\u2011not\u2011present transactions. Virtual cards are often obtained with weaker identity verification or sourced from compromised accounts, making them attractive instruments for testing stolen card data, funding mule accounts, or executing rapid series of purchases and refunds. Their disposability allows fraud actors to run multiple transactions, dispute or reverse charges, and then discard the card, reducing the risk that a single compromised instrument links together the broader scheme.\n\nVirtual cards are frequently employed in promotion abuse, synthetic identity fraud, and account takeover scenarios, for example, to cash out loyalty points, rotate through trial or subscription offers, or route payments through intermediary wallets and marketplaces. They can also be used to create complex transaction chains across merchants and jurisdictions, complicating efforts to tie specific fraudulent purchases back to the originating compromised identity or account. This flexibility makes virtual cards a convenient tool for scaling and obscuring a wide range of digital fraud schemes, even when they are not explicitly part of a formal money\u2011laundering process.","tactics":["stealth"],"parent":null,"isSub":false,"source":"f3","url":"https://ctid.mitre.org/fraud/techniques/F1048"},{"id":"T1070","name":"Indicator Removal","description":"Fraud actors may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses. Various artifacts may be created by a fraud actor or something that can be attributed to afraud actor\u2019s actions. Typically these artifacts are used as defensive indicators related to monitored events, such as strings from downloaded files, logs that are generated from user actions, and other data analyzed by defenders. Location, format, and type of artifact (such as command or login history) are often specific to each platform.\n\nRemoval of these indicators may interfere with event collection, reporting, or other processes used to detect intrusion activity. This may compromise the integrity of security solutions by causing notable events to go unreported. This activity may also impede forensic analysis and incident response, due to lack of sufficient data to determine what occurred.","tactics":["stealth"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1070"},{"id":"T1110","name":"Brute Force","description":"Fraud actors may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained. Without knowledge of the password for an account or set of accounts, a fraud actor may systematically guess the password using a repetitive or iterative mechanism. Brute forcing passwords can take place via interaction with a service that will check the validity of those credentials or offline against previously acquired credential data, such as password hashes.\n\nBrute forcing credentials may take place at various points during a breach. For example, fraud actors may attempt to brute force access to Valid Accounts within a victim environment leveraging knowledge gathered from other post-compromise behaviors such as OS Credential Dumping, Account Discovery, or Password Policy Discovery. Fraud actors may also combine brute forcing activity with behaviors such as External Remote Services as part of Initial Access.\n\nIf a fraud actor guesses the correct password but fails to login to a compromised account due to location-based conditional access policies, they may change their infrastructure until they match the victim\u2019s location and therefore bypass those policies.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1110"},{"id":"T1110.001","name":"Brute Force: Password Guessing","description":"Fraud actors with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts. Without knowledge of the password for an account, a fraud actor may opt to systematically guess the password using a repetitive or iterative mechanism. A fraud actor may guess login credentials without prior knowledge of system or environment passwords during an operation by using a list of common passwords. Password guessing may or may not take into account the target's policies on password complexity or use policies that may lock accounts out after a number of failed attempts.\n\nGuessing passwords can be a risky option because it could cause numerous authentication failures and account lockouts, depending on the organization's login failure policies.","tactics":["initial-access"],"parent":"T1110","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1110.001"},{"id":"T1110.002","name":"Brute Force: Password Cracking","description":"Fraud actors may use password cracking to attempt to recover usable credentials, such as plaintext passwords, when credential material such as password hashes are obtained. OS Credential Dumping can be used to obtain password hashes, this may only get a fraud actor so far when Pass the Hash is not an option. Further, fraud actors may leverage Data from Configuration Repository in order to obtain hashed credentials for network devices.\n\nTechniques to systematically guess the passwords used to compute hashes are available, or the fraud actor may use a pre-computed rainbow table to crack hashes. Cracking hashes is usually done on fraudster-controlled systems outside of the target network. The resulting plaintext password resulting from a successfully cracked hash may be used to log into systems, resources, and services in which the account has access.","tactics":["initial-access"],"parent":"T1110","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1110.002"},{"id":"T1110.003","name":"Brute Force: Password Spraying","description":"Fraud actors may use a single or small list of commonly used passwords against many different accounts to attempt to acquire valid account credentials. Password spraying uses one password (e.g. 'Password01'), or a small list of commonly used passwords, that may match the complexity policy of the domain. Logins are attempted with that password against many different accounts on a network to avoid account lockouts that would normally occur when brute forcing a single account with many passwords.\n\nIn order to avoid detection thresholds, fraud actors may deliberately throttle password spraying attempts to avoid triggering security alerting. Additionally, fraud actors may leverage LDAP and Kerberos authentication attempts, which are less likely to trigger high-visibility events such as Windows \"logon failure\" event ID 4625 that is commonly triggered by failed SMB connection attempts.","tactics":["initial-access"],"parent":"T1110","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1110.003"},{"id":"T1110.004","name":"Brute Force:  Credential Stuffing","description":"Fraud actors may use credentials obtained from breach dumps of unrelated accounts to gain access to target accounts through credential overlap. Occasionally, large numbers of username and password pairs are dumped online when a website or service is compromised and the user account credentials accessed. The information may be useful to a fraud actor attempting to compromise accounts by taking advantage of the tendency for users to use the same passwords across personal and business accounts.\n\nCredential stuffing is a risky option because it could cause numerous authentication failures and account lockouts, depending on the organization's login failure policies.","tactics":["initial-access"],"parent":"T1110","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1110.004"},{"id":"T1111","name":"Multi-Factor Authentication Interception","description":"Fraud actors may intercept multi-factor authentication credentials or tokens to bypass additional security controls. This may include intercepting SMS messages containing one-time codes, capturing push notification approvals, compromising hardware tokens, or exploiting vulnerabilities in MFA implementations. Successful MFA interception allows fraud actors to complete authentication despite not possessing legitimate MFA credentials.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1111"},{"id":"T1113","name":"Screen Capture","description":"Fraud actors may attempt to take screen captures of the desktop to gather information over the course of an operation. Screen capturing functionality may be included as a feature of a remote access tool used in post-compromise operations. Taking a screenshot is also typically possible through native utilities or API calls, such as CopyFromScreen, xwd, or screencapture.","tactics":["positioning"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1113"},{"id":"T1185","name":"Browser Session Hijacking","description":"Fraud actors may take advantage of security vulnerabilities and inherent functionality in browser software to change content, modify user-behaviors, and intercept information as part of various browser session hijacking techniques.\n\nA specific example is when a fraud actor injects software into a browser that allows them to inherit cookies, HTTP sessions, and SSL client certificates of a user then use the browser as a way to pivot into an authenticated intranet. Executing browser-based behaviors such as pivoting may require specific process permissions, such as SeDebugPrivilege and/or high-integrity/administrator rights\n\nAnother example involves pivoting browser traffic from the fraud actor's browser through the user's browser by setting up a proxy which will redirect web traffic. This does not alter the user's traffic in any way, and the proxy connection can be severed as soon as the browser is closed. The fraud actor assumes the security context of whichever browser process the proxy is injected into. Browsers typically create a new process for each tab that is opened and permissions and certificates are separated accordingly. With these permissions, a fraud actor could potentially browse to any resource on an intranet, such as SharePoint or webmail, that is accessible through the browser and which the browser has sufficient permissions. Browser pivoting may also bypass security provided by 2-factor authentication.","tactics":["initial-access","positioning"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1185"},{"id":"T1189","name":"Drive-by Compromise","description":"Fraud actors may gain access to a system through a user visiting a website over the normal course of browsing. Multiple ways of delivering exploit code to a browser exist (i.e., Drive-by Target), including: \n- A legitimate website is compromised, allowing fraud actors to inject malicious code\n- Script files served to a legitimate website from a publicly writeable cloud storage bucket are modified by a fraud actor\n- Malicious ads are paid for and served through legitimate ad providers (i.e., Malvertising)\n- Built-in web application interfaces that allow content are leveraged for the insertion of malicious scripts or iFrames (e.g., cross-site scripting)\n\nBrowser push notifications may also be abused by fraud actors and leveraged for malicious code injection via User Execution. By clicking \"allow\" on browser push notifications, users may be granting a website permission to run JavaScript code on their browser.\nOften the website used by a fraud actor is one visited by a specific community, such as government, a particular industry, or a particular region, where the goal is to compromise a specific user or set of users based on a shared interest. This kind of targeted campaign is often referred to a strategic web compromise or watering hole attack. There are several known examples of this occurring.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1189"},{"id":"T1195","name":"Supply Chain Compromise","description":"Fraud actors may manipulate products or product delivery mechanisms prior to receipt by a final consumer for the purpose of data or system compromise.\n\nSupply chain compromise can take place at any stage of the supply chain including:\n\n- Manipulation of development tools\n- Manipulation of a development environment\n- Manipulation of source code repositories (public or private)\n- Manipulation of source code in open-source dependencies\n- Manipulation of software update/distribution mechanisms\n- Compromised/infected system images (removable media infected at the factory)\n- Replacement of legitimate software with modified versions\n- Sales of modified/counterfeit products to legitimate distributors\n- Shipment interdiction\n\nWhile supply chain compromise can impact any component of hardware or software, fraud actors looking to gain execution have often focused on malicious additions to legitimate software in software distribution or update channels. Fraud actors may limit targeting to a desired victim set or distribute malicious software to a broad set of consumers but only follow up with specific victims. Popular open-source projects that are used as dependencies in many applications may also be targeted as a means to add malicious code to users of the dependency.\n\nIn some cases, fraud actors may conduct \"second-order\" supply chain compromises by leveraging the access gained from an initial supply chain compromise to further compromise a software component. This may allow the threat actor to spread to even more victims.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1195"},{"id":"T1219","name":"Remote Access Tools","description":"A fraud actor may use legitimate remote access tools to establish an interactive command and control channel within a network. Remote access tools create a session between two trusted hosts through a graphical interface, a command line interaction, a protocol tunnel via development or management software, or hardware-level access such as KVM (Keyboard, Video, Mouse) over IP solutions. Desktop support software (usually graphical interface) and remote management software (typically command line interface) allow a user to control a computer remotely as if they are a local user inheriting the user or software permissions. This software is commonly used for troubleshooting, software installation, and system management.\u00a0Fraud actors may similarly abuse response features included in EDR and other defensive tools that enable remote access","tactics":["positioning"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1219"},{"id":"T1451","name":"SIM Card Swap","description":"Unauthorized SIM changes including swapping to a new SIM card within the same carrier or porting the phone number to a new SIM card at a new carrier. This results in voice and SMS communications being redirected to the threat-actor.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1451"},{"id":"T1453","name":"Abuse Accessibility Features","description":"Fraud actors may abuse accessibility features on mobile devices to intercept and manipulate authentication processes. Malicious applications may request accessibility service permissions, enabling them to monitor screen content, intercept authentication prompts, and capture one-time passwords or other multi-factor authentication codes displayed on the device. This technique allows fraud actors to bypass security controls by gaining unauthorized access to sensitive information presented through legitimate authentication interfaces.","tactics":["positioning"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1453"},{"id":"T1531","name":"Account Access Removal","description":"Fraud actors may remove or alter account access controls after gaining unauthorized access to lock out legitimate account owners. This may include changing login credentials, modifying account recovery information, or manipulating user roles and permissions within enterprise systems. By preventing the legitimate owner from regaining access, fraud actors maintain persistent control over compromised accounts.","tactics":["positioning"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1531"},{"id":"T1539","name":"Steal Web Session Cookie","description":"A fraud actor may steal web application or service session cookies and use them to gain access to web applications or Internet services as an authenticated user without needing credentials. Web applications and services often use session cookies as an authentication token after a user has authenticated to a website.\n\nCookies are often valid for an extended period of time, even if the web application is not actively used. Cookies can be found on disk, in the process memory of the browser, and in network traffic to remote systems. Additionally, other applications on the targets machine might store sensitive authentication cookies in memory (e.g. apps which authenticate to cloud services). Session cookies can be used to bypasses some multi-factor authentication protocols.\n\nThere are several examples of malware targeting cookies from web browsers on the local system. Fraud actors may also steal cookies by injecting malicious JavaScript content into websites or relying on User Execution by tricking victims into running malicious JavaScript in their browser.\n\nThere are also open source frameworks such as Evilginx2 and Muraena that can gather session cookies through a malicious proxy (e.g., Adversary-in-the-Middle) that can be set up by a fraud actor and used in phishing campaigns.\n\nAfter a fraud actor acquires a valid cookie, they can then perform a Web Session Cookie technique to login to the corresponding web application.","tactics":["positioning","initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1539"},{"id":"T1550","name":"Use Alternate Authentication Material","description":"Fraud actors may use authentication materials other than passwords to gain unauthorized access to accounts or systems. This may include using stolen authentication tokens, session cookies, API keys, or biometric data. Alternate authentication materials may be longer-lived than passwords, may not trigger password-based security controls, or may be easier to steal than passwords in certain scenarios.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1550"},{"id":"T1550.001","name":"Use Alternate Authentication Material: Application Access Token","description":"Fraud actors may use stolen application access tokens to authenticate to services without requiring passwords or MFA. Access tokens are often long-lived, may have broad permissions, and may not be protected as carefully as passwords. Stolen tokens can be obtained through malware, phishing, insecure storage, or compromised applications. Using stolen tokens allows fraud actors to bypass password-based authentication controls and may not trigger alerts for unusual login locations.","tactics":["initial-access"],"parent":"T1550","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1550.001"},{"id":"T1555","name":"Credentials from Password Stores","description":"Fraud actors may search for common password storage locations to obtain user credentials. Passwords are stored in several places on a system, depending on the operating system or application holding the credentials. There are also specific applications and services that store passwords to make them easier for users to manage and maintain, such as password managers and cloud secrets vaults. Once credentials are obtained, they can be used to perform lateral movement and access restricted information.","tactics":["reconnaissance"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1555"},{"id":"T1555.003","name":"Credentials from Password Stores: Credentials from Web Browsers","description":"Fraud actors may extract credentials saved in web browser password storage mechanisms. Web browsers commonly offer to save and autofill credentials for user convenience, but this stored information can be extracted by malware or fraud actors with local access. Extracted credentials may include usernames, passwords, and authentication tokens for various online services.","tactics":["reconnaissance"],"parent":"T1555","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1555.003"},{"id":"T1555.005","name":"Credentials from Password Stores: Password Managers","description":"Fraud actors may acquire user credentials from third-party password managers.[1]\u00a0Password managers are applications designed to store user credentials, normally in an encrypted database. Credentials are typically accessible after a user provides a master password that unlocks the database. After the database is unlocked, these credentials may be copied to memory. These databases can be stored as files on disk.","tactics":["reconnaissance"],"parent":"T1555","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1555.005"},{"id":"T1557","name":"Adversary-in-the-Middle","description":"Fraud actors may attempt to position themselves between two or more devices to support follow-on behaviors such as\u00a0Network Sniffing,\u00a0Transmitted Data Manipulation, or replay attacks (Exploitation for Credential Access). By abusing features of common network protocols that can determine the flow of network traffic (e.g. ARP, DNS, LLMNR, etc.), fraud actors may force a device to communicate through a fraudster-controlled system so they can collect information or perform additional actions.","tactics":["initial-access","positioning","execution"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1557"},{"id":"T1583","name":"Acquire Infrastructure","description":"Fraud actors may acquire or compromise infrastructure to support fraud operations. This may include registering domains, establishing hosting services, deploying command and control infrastructure, or compromising legitimate infrastructure for malicious use. Acquired infrastructure provides fraud actors with resources needed to conduct phishing campaigns, host malicious content, process fraudulent transactions, or maintain persistent access to compromised environments.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1583"},{"id":"T1583.001","name":"Acquire Infrastructure: Domains","description":"Fraud actors may register domains similar to legitimate organizations or services to support fraud operations. This may include typosquatting domains, domains using different top-level domains, or domains incorporating organization names with additional words. Fraudulent domains are used for phishing websites, fake service websites, or to send emails that appear to originate from legitimate organizations.","tactics":["resource-development"],"parent":"T1583","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1583.001"},{"id":"T1583.003","name":"Acquire Infrastructure: Virtual Private Network or Server","description":"Fraud actors may acquire access to VPN services or anonymous proxy servers to mask their activities or create the appearance of legitimate operations. VPN and proxy services allow fraud actors to obscure their true location, bypass geographic restrictions, evade detection systems that rely on IP reputation, or simulate legitimate user traffic patterns during fraud operations.","tactics":["resource-development"],"parent":"T1583","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1583.003"},{"id":"T1583.008","name":"Acquire Infrastructure: Malvertising","description":"Fraud actors may create malicious advertisements that direct users to fraudulent sites equipped with credential harvesting or payment card skimming capabilities. This may include advertisements for fraudulent merchant sites, compromised legitimate merchant sites, and fradulent Whatsapp investment groups. Fraud actors often use stolen payment card data to fund advertising campaigns, creating a self-sustaining fraud operation where stolen credentials fund further credential theft activities.","tactics":["resource-development"],"parent":"T1583","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1583.008"},{"id":"T1585","name":"Establish Accounts","description":"Fraud actors may create and cultivate accounts with services that can be used during targeting. fraud actors can create accounts that can be used to build a persona to further operations. Persona development consists of the development of public information, presence, history and appropriate affiliations. This development could be applied to social media, website, or other publicly available information that could be referenced and scrutinized for legitimacy over the course of an operation using that persona or identity.\n\nFor operations incorporating social engineering, the utilization of an online persona may be important. These personas may be fictitious or impersonate real people. The persona may exist on a single site or across multiple sites (ex: Facebook, LinkedIn, Twitter, Google, GitHub, Docker Hub, etc.). Establishing a persona may require development of additional documentation to make them seem real. This could include filling out profile information, developing social networks, or incorporating photos.\n\nEstablishing accounts can also include the creation of accounts with email providers, which may be directly leveraged for Phishing for Information or Phishing. In addition, establishing accounts may allow fraud actors to abuse free services, such as registering for trial periods to Acquire Infrastructure for malicious purposes.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1585"},{"id":"T1586","name":"Compromise Accounts","description":"Fraud Actors may compromise accounts with services that can be used during targeting. For operations incorporating social engineering, the utilization of an online persona may be important. Rather than creating and cultivating accounts (i.e. Establish Accounts), adversaries may compromise existing accounts. Utilizing an existing persona may engender a level of trust in a potential victim if they have a relationship, or knowledge of, the compromised persona.\n\nA variety of methods exist for compromising accounts, such as gathering credentials via Phishing for Information, purchasing credentials from third-party sites, brute forcing credentials (ex: password reuse from breach credential dumps), or paying employees, suppliers or business partners for access to credentials.Prior to compromising accounts, adversaries may conduct Reconnaissance to inform decisions about which accounts to compromise to further their operation.\n\nPersonas may exist on a single site or across multiple sites (ex: Facebook, LinkedIn, Twitter, Google, etc.). Compromised accounts may require additional development, this could include filling out or modifying profile information, further developing social networks, or incorporating photos.\n\nFraud actors may directly leverage compromised email accounts for Phishing for Information or Phishing.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1586"},{"id":"T1586.001","name":"Compromise Accounts: Social Media Accounts","description":"Adversaries may compromise social media accounts that can be used during targeting. For operations incorporating social engineering, the utilization of an online persona may be important. Rather than creating and cultivating social media profiles (i.e. Social Media Accounts), adversaries may compromise existing social media accounts. Utilizing an existing persona may engender a level of trust in a potential victim if they have a relationship, or knowledge of, the compromised persona.\n\nA variety of methods exist for compromising social media accounts, such as gathering credentials via Phishing for Information, purchasing credentials from third-party sites, or by brute forcing credentials (ex: password reuse from breach credential dumps). Prior to compromising social media accounts, adversaries may conduct Reconnaissance to inform decisions about which accounts to compromise to further their operation.\n\nPersonas may exist on a single site or across multiple sites (ex: Facebook, LinkedIn, Twitter, etc.). Compromised social media accounts may require additional development, this could include filling out or modifying profile information, further developing social networks, or incorporating photos.\n\nAdversaries can use a compromised social media profile to create new, or hijack existing, connections to targets of interest. These connections may be direct or may include trying to connect through others. Compromised profiles may be leveraged during other phases of the adversary lifecycle, such as during Initial Access (ex: Spearphishing via Service).","tactics":["resource-development"],"parent":"T1586","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1586.001"},{"id":"T1586.002","name":"Compromise Accounts: Email Accounts","description":"Fraud actors may compromise email accounts that can be used during targeting. Fraud actors can use compromised email accounts to further their operations, such as leveraging them to conduct Phishing for Information, Phishing, or large-scale spam email campaigns. Utilizing an existing persona with a compromised email account may engender a level of trust in a potential victim if they have a relationship with, or knowledge of, the compromised persona. Compromised email accounts can also be used in the acquisition of infrastructure (ex: Domains).\n\nA variety of methods exist for compromising email accounts, such as gathering credentials via Phishing for Information, purchasing credentials from third-party sites, brute forcing credentials (ex: password reuse from breach credential dumps), or paying employees, suppliers or business partners for access to credentials. Prior to compromising email accounts, fraud actors may conduct Reconnaissance to inform decisions about which accounts to compromise to further their operation. Fraud actors may target compromising well-known email accounts or domains from which malicious spam or Phishing emails may evade reputation-based email filtering rules.\n\nFraud actors can use a compromised email account to hijack existing email threads with targets of interest.","tactics":["resource-development"],"parent":"T1586","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1586.002"},{"id":"T1586.003","name":"Compromise Accounts: Cloud Accounts","description":"Fraud Actors may compromise cloud accounts that can be used during targeting. Adversaries can use compromised cloud accounts to further their operations, including leveraging cloud storage services such as Dropbox, Microsoft OneDrive, or AWS S3 buckets for Exfiltration to Cloud Storage or to Upload Tools. Cloud accounts can also be used in the acquisition of infrastructure, such as Virtual Private Servers or Serverless infrastructure. Additionally, cloud-based messaging services such as Twilio, SendGrid, AWS End User Messaging, AWS SNS (Simple Notification Service), or AWS SES (Simple Email Service) may be leveraged for spam or Phishing. Compromising cloud accounts may allow adversaries to develop sophisticated capabilities without managing their own servers.\n\nA variety of methods exist for compromising cloud accounts, such as gathering credentials via Phishing for Information, purchasing credentials from third-party sites, conducting Password Spraying attacks, or attempting to Steal Application Access Tokens.[4] Prior to compromising cloud accounts, adversaries may conduct Reconnaissance to inform decisions about which accounts to compromise to further their operation. In some cases, adversaries may target privileged service provider accounts with the intent of leveraging a Trusted Relationship between service providers and their customers.","tactics":["resource-development"],"parent":"T1586","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1586.003"},{"id":"T1586.004","name":"Compromise Accounts: Corporate Accounts","description":"Fraud actors may compromise corporate accounts that can be used during targeting and follow-on fraud operations. Compromised corporate accounts provide fraud actors with legitimate access to business systems, internal applications, and communication channels that can be leveraged to conduct business email compromise attacks, initiate unauthorized transactions, or modify business processes for financial gain.\n\nA variety of methods exist for compromising corporate accounts, such as gathering credentials via Phishing for Information, purchasing credentials from third-party sites, brute forcing credentials (for example, password reuse from breach credential dumps), or paying employees, suppliers, or business partners for access to credentials. Prior to compromising corporate accounts, fraud actors may conduct Reconnaissance to identify high-value employees, roles, or business units whose access can provide entry to sensitive data, financial systems, or approval workflows.\n\nOnce compromised, corporate accounts may be used to access internal systems, customer records, financial information, or other protected corporate resources, as well as to authorize fraudulent payments or make unauthorized changes to vendor, payroll, or billing details. Fraud actors may also further develop the compromised corporate identity, such as by maintaining normal email behavior or updating profiles, to preserve trust with partners and customers while they execute and expand their fraud schemes.","tactics":["resource-development"],"parent":"T1586","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1586.004"},{"id":"T1593","name":"Search Open Websites/Domains","description":"Fraud actors may search freely available online sources for information about customers or organizations that can be used to plan and target fraud. This can include browsing social media profiles, public records, company websites, data\u2011leak forums, and other open sources to collect details such as contact information, roles, affiliations, and recent activity.\n\nThey may tailor where they look based on the type of information needed\u2014for example, using professional networks to identify finance staff, public procurement sites to learn about vendors and contracts, or social platforms to understand personal relationships and behaviors. Information gathered from open sources can then be used to craft convincing social\u2011engineering pretexts, identify high\u2011value accounts or employees, and enable follow\u2011on techniques such as phishing for information, establishing or compromising accounts, or attempting direct access to exposed services.","tactics":["reconnaissance"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1593"},{"id":"T1593.001","name":"Search Open Websites/Domains: Social Media","description":"Fraud actors may search social media platforms for information about customers or organizations that can be used to plan and target fraud. Public posts, profiles, and company pages can reveal details such as roles and seniority, contact information, locations, recent business events, and personal interests or relationships that make social\u2011engineering attempts more convincing.\n\nThey may passively harvest data from multiple social networks or professional platforms, then use that information to tailor phishing messages, impersonate trusted contacts, or identify high\u2011value employees and accounts. Fraud actors may also create fake profiles, pages, or groups that mimic real people or organizations in order to build rapport and lure targets into disclosing additional details, which can then be used to support account takeover, new\u2011account fraud, or other targeted fraud operations.","tactics":["reconnaissance"],"parent":"T1593","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1593.001"},{"id":"T1593.002","name":"Search Open Websites/Domains: Search Engines","description":"Fraud actors may use search engines to collect information about customers, employees, and organizations that can be leveraged for fraud. General queries can surface public details such as contact information, exposed documents, cached pages, and references to accounts or services tied to a target.\n\nThey may also craft specialized queries (for example, using advanced operators or searching by file type) to locate accidentally exposed data, such as configuration files, credential lists, internal documents, or screenshots containing sensitive information. Insights gathered from search results can then be used to refine social\u2011engineering pretexts, identify weakly protected services, support account takeover or new\u2011account fraud, and guide further reconnaissance against specific people, systems, or business processes.","tactics":["reconnaissance"],"parent":"T1593","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1593.002"},{"id":"T1598","name":"Phishing for Information","description":"Fraud actors may send phishing messages across multiple channels - email, SMS (smishing), QR codes (quishing), and voice calls (vishing) - to elicit sensitive information for targeting and follow\u2011on fraud. Phishing for information focuses on tricking targets into revealing credentials, one\u2011time passcodes, or other actionable data, and is distinct from Phishing, which primarily aims to get the user to execute malicious code or payloads.\n\nThese are all electronically delivered social\u2011engineering attacks. Email phishing and spearphishing may target specific people or organizations, while broad campaigns support mass credential harvesting. Smishing uses deceptive texts, quishing uses QR codes that lead to fraudulent sites, and vishing relies on calls or voicemail to socially engineer victims, sometimes by luring them to dial a controlled phone number.\n\nPhishing for information typically uses convincing pretexts\u2014such as posing as a bank, payment provider, help desk, or vendor\u2014and often leverages urgency like account lockouts or security alerts. Attackers combine email spoofing, look\u2011alike domains, shortened links in SMS, and caller\u2011ID spoofing in vishing to appear legitimate, and may hide or manipulate messages, headers, sender IDs, or phone numbers to bypass security tools and reduce the chance of detection across email, SMS, QR, and voice channels.","tactics":["reconnaissance"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1598"},{"id":"T1608","name":"Stage Capabilities","description":"Fraud actors may upload, install, or otherwise set up capabilities and infrastructure that will be used in later stages of fraud operations. This can include staging tools and content they have developed or acquired on infrastructure they control, such as purchased or compromised servers, cloud platforms, or web services, as well as on third\u2011party platforms like app stores, code\u2011hosting sites, or social networks.\n\nStaging activities may involve hosting phishing or impersonation websites, configuring command\u2011and\u2011control or automation infrastructure, uploading malicious applications or scripts, or creating and populating social media profiles and other online personas for fraud operations. Fraud actors may also stage payloads, tooling, and supporting web resources used to deliver links or files in phishing campaigns, to enable later tool transfer into victim environments, or to support encrypted communications and other operational needs. Collectively, these actions position the technical resources required to execute and sustain fraud at scale.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1608"},{"id":"T1608.006","name":"Stage Capabilities: SEO Poisoning","description":"Fraud actors may manipulate search engine optimization to position malicious websites prominently in search results for targeted keywords. SEO poisoning can make fraudulent websites, phishing pages, or malicious content appear in top search results for legitimate queries. This technique exploits user trust in search engines and may target users searching for customer service contact information, software downloads, or financial services.","tactics":["resource-development"],"parent":"T1608","isSub":true,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1608.006"},{"id":"T1621","name":"Multi-Factor Authentication Request Generation","description":"Fraud actors may generate multiple MFA requests to overwhelm or pressure victims into approving fraudulent authentication attempts. This technique, often called MFA fatigue, involves repeatedly generating authentication requests until the victim approves access to stop the notifications. Fraud actors rely on user frustration, confusion, or mistakes to gain approval for unauthorized access attempts.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1621"},{"id":"T1650","name":"Acquire Access","description":"Fraud actors may purchase or otherwise obtain existing access to organizations, accounts, or infrastructure instead of gaining access themselves. This access is often sold through underground markets or broker networks and can include compromised bank and customer accounts, merchant accounts, remote access into back\u2011office systems, or logins to third\u2011party platforms that process payments or store customer data.\n\nPurchased access may take many forms, such as credentials and MFA artifacts for online banking or payment accounts, administrative access to merchant portals, remote access tools already deployed on internal systems, or API keys and tokens that allow programmatic control of financial services. Brokers may also pre\u2011install tooling or \u201cloads\u201d that buyers can use to deploy additional malware or automate fraud at scale.\n\nBy leveraging acquired access, fraud actors can bypass early intrusion steps and focus on high\u2011value fraud activity such as moving funds, altering account details, manipulating transactions, or harvesting additional identities and credentials. They may prioritize buying access to accounts or systems with high limits, weak monitoring, or privileged roles, and to organizations in sectors (for example, processors, fintechs, BPOs, or service providers) where a single foothold can be used to reach additional victims through trusted business relationships and shared platforms.","tactics":["resource-development"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1650"},{"id":"T1660","name":"Phishing","description":"Fraud Actors may send malicious content to users in order to gain access to their mobile devices. All forms of phishing are electronically delivered social engineering. Adversaries can conduct both non-targeted phishing, such as in mass malware spam campaigns, as well as more targeted phishing tailored for a specific individual, company, or industry, known as \"spearphishing.\" Phishing often involves social engineering techniques, such as posing as a trusted source, as well as evasion techniques, such as removing or manipulating emails or metadata/headers from compromised accounts being abused to send messages.\n\nMobile phishing may take various forms. For example, adversaries may send emails containing malicious attachments or links, typically to deliver and then execute malicious code on victim devices. Phishing may also be conducted via third-party services, like social media platforms. Adversaries may also impersonate executives of organizations to persuade victims into performing some action on their behalf. For example, adversaries will often use social engineering techniques in text messages to trick the victims into acting quickly, which leads to adversaries obtaining credentials and other information.\n\nMobile devices have sensors and radios that allow adversaries to execute phishing attempts over several different vectors, such as:\n\n- SMS messages: Adversaries may send SMS messages (known as \"smishing\") from compromised devices to potential targets to convince the target to, for example, install malware, navigate to a specific website, or enable certain insecure configurations on their device.\n- Quick Response (QR) Codes: Adversaries may use QR codes (known as \"quishing\") to redirect users to a phishing website. For example, an adversary could replace a legitimate public QR Code with one that leads to a different destination, such as a phishing website. A malicious QR code could also be delivered via other means, such as SMS or email. In the latter case, an adversary could utilize a malicious QR code in an email to pivot from the user\u2019s desktop computer to their mobile device.\n- Phone Calls: Adversaries may call victims (known as \"vishing\") to persuade them to perform an action, such as providing login credentials or navigating to a malicious website. This could also be used as a technique to perform the initial access on a mobile device, but then pivot to a computer/other network by having the victim perform an action on a desktop computer.","tactics":["initial-access"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1660"},{"id":"T1667","name":"Email Bombing","description":"Fraud actors may flood targeted email addresses with an overwhelming volume of messages. This may bury legitimate emails in a flood of spam and disrupt business operations.[1][2]\n\nA fraud actor may accomplish email bombing by leveraging an automated bot to register a targeted address for e-mail lists that do not validate new signups, such as online newsletters. The result can be a wave of thousands of e-mails that effectively overloads the victim\u2019s inbox.[2][3]\n\nBy sending hundreds or thousands of e-mails in quick succession, fraud actors may successfully divert attention away from and bury legitimate messages including security alerts, daily business processes like help desk tickets and client correspondence, or ongoing scams.[3] This behavior can also be used as a tool of harassment.[2]","tactics":["defense-impairment"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1667"},{"id":"T1672","name":"Email Spoofing","description":"Fraud actors may forge or misrepresent the sender\u2019s email address and related headers so messages appear to come from a trusted or recognizable source, such as a bank, employer, vendor, or colleague. The goal is to make the email look legitimate enough that recipients will trust the content and act on it.\n\nSpoofed emails are commonly used in phishing and fraud schemes to convince victims to click links, open attachments, share credentials or other sensitive information, change payment details, or approve fraudulent transactions. By imitating known domains, display names, or reply\u2011to addresses - and sometimes bypassing basic email authentication controls - email spoofing increases the likelihood that fraudulent messages evade suspicion and technical defenses.","tactics":["stealth"],"parent":null,"isSub":false,"source":"attack","url":"https://ctid.mitre.org/fraud/techniques/T1672"}]};
@@ -432,11 +615,11 @@ const SCALE = {
 const SCOLOR = {0:"#C9B7AC",1:"#C2CFC6",2:"#8FB8A3",3:"#3D7F67"};
 
 const F3_VERSION = "1.1";
-const TOOL_VERSION = "1.0.0";
+const TOOL_VERSION = "1.1.0";
 const SCHEMA = 2;
 // state:    "ID|tactic" -> {none, na, naReason, list:[{cid, score|null, note}]}
 // registry: cid -> {id, name, owner}   (each control defined once)
-let state = {}, registry = {}, sel = null, view = "matrix", picking = false, pickActive = -1;
+let state = {}, registry = {}, sel = null, view = "matrix", picking = false;
 let meta = {author:"", org:"", title:"F3 Coverage Assessment", asOf:"", distinct:[], distinctOwners:[]};
 let restored = false, restoredAt = null;
 
@@ -551,7 +734,7 @@ if(!Array.isArray(meta.distinct)) meta.distinct=[];
 if(!Array.isArray(meta.distinctOwners)) meta.distinctOwners=[];
 if(meta.asOf===undefined) meta.asOf="";
 window.addEventListener("beforeunload", e => {
-  if((!storageOK || storageLocked) && hasWork()){ e.preventDefault(); e.returnValue = ""; }
+  if(((!storageOK || storageLocked) && hasWork()) || isDirty()){ e.preventDefault(); e.returnValue = ""; }
 });
 function hasWork(){ return Object.keys(state).length>0 || Object.keys(registry).length>0; }
 
@@ -593,39 +776,53 @@ function passScore(t,tac){
   const r=roll(cellOf(t.id,tac));
   if(f==="unassessed") return r===null;
   if(f==="na") return r==="na";
+  if(f==="nanoreason") return r==="na" && !clean((cellOf(t.id,tac)||{}).naReason);
   if(f==="gap") return isNum(r) && r<=1;
   if(f==="covered") return isNum(r) && r>=2;
   return true;
 }
 
-function renderMatrix(){
-  const m=$("#matrix"); m.innerHTML="";
+// Rows as the matrix and list show them: each top-level technique followed by its
+// sub-techniques. A parent stays visible for context when only one of its subs matches.
+function shownRows(){
+  const out=[];
   DATA.tactics.forEach(tac=>{
     const sn=tac.shortname;
-    const tops=DATA.techniques.filter(t=>!t.isSub&&t.tactics.includes(sn));
-    const col=document.createElement("div"); col.className="col";
-    let all=0,done=0,na=0;
-    const tally=r=>{ if(r==="na") na++; else if(r!==null) done++; };
-    tops.forEach(t=>{
-      all++; tally(roll(cellOf(t.id,sn)));
-      (kids[t.id]||[]).filter(s=>s.tactics.includes(sn)).forEach(s=>{
-        all++; tally(roll(cellOf(s.id,sn))); });
-    });
-    const scope=all-na;
-    const pct=scope?Math.round(done/scope*100):0;
-    col.innerHTML='<div class="colhead"><span class="nm">'+esc(tac.name)+'</span>'+
-      '<span class="ct">'+scope+' in scope &middot; '+pct+'%'+(na?' &middot; '+na+' excl':'')+'</span>'+
-      '<div class="colbar"><i style="width:'+pct+'%"></i></div></div>';
-    let shown=0;
-    tops.forEach(t=>{
+    DATA.techniques.filter(t=>!t.isSub&&t.tactics.includes(sn)).forEach(t=>{
       const subs=(kids[t.id]||[]).filter(s=>s.tactics.includes(sn));
       const selfOk=passFilter(t)&&passScore(t,sn);
       const subOk=subs.filter(s=>passFilter(s)&&passScore(s,sn));
       if(!selfOk&&!subOk.length) return;
-      col.appendChild(cellEl(t,sn,false)); shown++;
-      subOk.forEach(s=>{col.appendChild(cellEl(s,sn,true)); shown++;});
+      out.push({t,tac:sn,isSub:false,match:selfOk,key:k(t.id,sn)});
+      subOk.forEach(s=>out.push({t:s,tac:sn,isSub:true,match:true,key:k(s.id,sn)}));
     });
-    if(!shown){
+  });
+  return out;
+}
+function colStats(sn){
+  let all=0,done=0,na=0;
+  const tally=r=>{ if(r==="na") na++; else if(r!==null) done++; };
+  DATA.techniques.filter(t=>!t.isSub&&t.tactics.includes(sn)).forEach(t=>{
+    all++; tally(roll(cellOf(t.id,sn)));
+    (kids[t.id]||[]).filter(s=>s.tactics.includes(sn)).forEach(s=>{ all++; tally(roll(cellOf(s.id,sn))); });
+  });
+  const scope=all-na;
+  return {scope,na,pct:scope?Math.round(done/scope*100):0};
+}
+const statLine=st=>st.scope+' in scope &middot; '+st.pct+'%'+(st.na?' &middot; '+st.na+' excl':'');
+
+function renderMatrix(){
+  const m=$("#matrix"); m.innerHTML="";
+  const rows=shownRows();
+  DATA.tactics.forEach(tac=>{
+    const sn=tac.shortname, st=colStats(sn);
+    const col=document.createElement("div"); col.className="col";
+    col.innerHTML='<div class="colhead"><span class="nm">'+esc(tac.name)+'</span>'+
+      '<span class="ct">'+statLine(st)+'</span>'+
+      '<div class="colbar"><i style="width:'+st.pct+'%"></i></div></div>';
+    const mine=rows.filter(r=>r.tac===sn);
+    mine.forEach(r=>col.appendChild(cellEl(r.t,sn,r.isSub)));
+    if(!mine.length){
       const e=document.createElement("div");
       e.style.cssText="font-size:11px;color:var(--ink-3);padding:8px 2px";
       e.textContent="No matches"; col.appendChild(e);
@@ -635,20 +832,22 @@ function renderMatrix(){
 }
 
 function cellEl(t,tac,isSub){
-  const c=cellOf(t.id,tac), r=roll(c), n=c?c.list.length:0;
+  const c=cellOf(t.id,tac), r=roll(c), n=c?c.list.length:0, key=k(t.id,tac), pk=picked.has(key);
   const d=document.createElement("div");
   d.className="cell"+(isSub?" sub":"")+
     (r==="na"?" na":isNum(r)?" cs"+r:"")+
-    (sel&&sel.id===t.id&&sel.tactic===tac?" sel":"");
+    (sel&&sel.id===t.id&&sel.tactic===tac?" sel":"")+(pk?" picked":"");
   d.tabIndex=0; d.dataset.src=t.source; d.dataset.id=t.id; d.dataset.tac=tac;
+  if(selecting){ d.setAttribute("role","checkbox"); d.setAttribute("aria-checked",String(pk)); }
   d.innerHTML=(r==="na"?"":'<span class="dot '+cls(isNum(r)?r:null)+'"></span>')+
+    '<span class="pk" aria-hidden="true"></span>'+
     '<span class="tid mono">'+t.id+'</span>'+
-    '<span class="tnm">'+esc(t.name.replace(/^.*?: /,""))+'</span>'+
-    (r==="na"?'<span class="nctl">excluded</span>':
-     n?'<span class="nctl">'+n+' ctl</span>':(c&&c.none?'<span class="nctl">no ctl</span>':''));
-  const open=()=>openPanel(t.id,tac);
-  d.onclick=open;
-  d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};
+    '<span class="tnm">'+esc(t.name.replace(/^.*?: /,""))+
+    (r==="na"?(clean(c.naReason)?'<span class="nctl">excluded</span>':'<span class="nctl nr">no rationale</span>'):
+     n?'<span class="nctl">'+n+' ctl</span>':(c&&c.none?'<span class="nctl">no ctl</span>':''))+'</span>';
+  const act=e=>{ if(selecting) togglePick(key,!!(e&&e.shiftKey)); else openPanel(t.id,tac); };
+  d.onclick=act;
+  d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act(e);}};
   return d;
 }
 
@@ -663,20 +862,53 @@ function prune(id,tac){
   const key=k(id,tac), c=state[key];
   if(c && !c.none && !c.na && !c.list.length) delete state[key];
 }
-function usesIndex(){
+// Where each control is used. Out-of-scope techniques keep their controls but hide them,
+// so they are left out unless all=true (owner changes and deletes still reach them).
+function usesIndex(all){
   const m={};
   Object.entries(state).forEach(([key,c])=>{
+    if(c.na && !all) return;
     const [id,tac]=key.split("|"); const t=byId[id]; if(!t) return;
     (c.list||[]).forEach(x=>{ (m[x.cid]=m[x.cid]||[]).push({t,tac,score:x.score,note:x.note}); });
   });
   return m;
 }
 
+/* ---------------- panel: draft, save, discard ---------------- */
+// The panel edits a draft. Changes show live in the matrix, but nothing autosaves until
+// Save. Cancel, or Discard when closing with changes, puts everything back as it was.
+let draft=null;
+function canon(){
+  const s={}, r={};
+  Object.keys(state).sort().forEach(key=>{ const c=state[key]; if(c.none||c.na||c.list.length) s[key]=c; });
+  Object.keys(registry).sort().forEach(id=>{ r[id]=registry[id]; });
+  return JSON.stringify([s,r]);
+}
+function beginDraft(){
+  const c=cellOf(sel.id,sel.tactic);
+  draft={snap:JSON.stringify({state,registry}),canon:canon(),naAll:true,
+    origNA:!!(c&&c.na),origReason:(c&&c.naReason)||""};
+}
+function isDirty(){ return !!draft && canon()!==draft.canon; }
+function updateDirtyUI(){
+  const d=isDirty(), p=$("#pState");
+  p.textContent=d?"Unsaved changes":"No changes yet";
+  p.classList.toggle("dirty",d);
+}
 function openPanel(id,tac){
-  const same = sel && sel.id===id && sel.tactic===tac;
-  if(!same){ picking=false; pickActive=-1; }
-  const wasOpen=$("#panel").classList.contains("open");
+  if(sel && sel.id===id && sel.tactic===tac){ renderPanel(); return; }
+  if(sel && isDirty()){ askUnsaved(()=>openPanel(id,tac)); return; }
+  if(sel){ prune(sel.id,sel.tactic); draft=null; }
+  picking=false;
   sel={id,tactic:tac};
+  beginDraft();
+  renderPanel();
+}
+
+function renderPanel(){
+  if(!sel) return;
+  const id=sel.id, tac=sel.tactic;
+  const wasOpen=$("#panel").classList.contains("open");
   const t=byId[id], c=cellOf(id,tac), r=roll(c);
   const list=c?c.list:[];
 
@@ -692,7 +924,7 @@ function openPanel(id,tac){
   $("#pRoll").innerHTML = r===null
     ? '<small>Not assessed. Add a control, mark that none is in place, or exclude it from scope.</small>'
     : r==="na"
-    ? '<b>Out of scope</b><small>Excluded from coverage totals.</small>'
+    ? '<b>Out of scope</b><small>Excluded from coverage totals.'+(clean(c.naReason)?'':' No rationale recorded yet.')+'</small>'
     : '<span class="sw '+cls(r)+'" style="width:14px;height:14px"></span><b>'+r+' '+SCALE[r][0]+'</b>'+
       '<small>'+(c.none?'Confirmed gap':'from '+s.length+' scored control'+(s.length===1?"":"s")+
       (weaker?' &middot; '+weaker+' weaker below':''))+'</small>';
@@ -702,12 +934,13 @@ function openPanel(id,tac){
   cb.checked=isNone; nb.classList.toggle("on",isNone);
   nb.style.display=isNA?"none":"flex";
   const nab=$("#pNABox"); $("#pNA").checked=isNA; nab.classList.toggle("on",isNA);
-  nab.style.display=isNone?"none":"flex";
   $("#pNAReasonWrap").style.display=isNA?"block":"none";
-  $("#pNAReason").value=(c&&c.naReason)||"";
-  $("#pCtlWrap").classList.toggle("dim",isNone||isNA);
+  if(document.activeElement!==$("#pNAReason")) $("#pNAReason").value=(c&&c.naReason)||"";
+  $("#pCtlSec").style.display=isNA?"none":"";
+  $("#pCtlWrap").classList.toggle("dim",isNone);
+  updateScopeExtras();
 
-  const idx=usesIndex();
+  const idx=usesIndex(true);
   const box=$("#pCtls"); box.innerHTML="";
   list.forEach((m,i)=>box.appendChild(ctlEl(m,i,(idx[m.cid]||[]).length)));
   if(!list.length && !picking){
@@ -716,7 +949,7 @@ function openPanel(id,tac){
     e.textContent="No controls recorded.";
     box.appendChild(e);
   }
-  if(picking) box.appendChild(pickerEl());
+  if(picking) box.appendChild(pickerEl({id,tac},"p",panelChoose,panelCancelPick));
   $("#pAdd").style.display = picking ? "none" : "";
 
   const others=t.tactics.filter(x=>x!==tac).map(tacName);
@@ -726,8 +959,54 @@ function openPanel(id,tac){
 
   $("#panel").classList.add("open"); $("#panel").setAttribute("aria-hidden","false");
   $("#scrim").classList.add("on");
-  renderMatrix();
+  if(view==="matrix") renderMatrix();
+  applyInert(); updateDirtyUI();
   if(!wasOpen) $("#pClose").focus({preventScroll:true});
+}
+
+function joinAnd(a){ return a.length<2?a.join(""):a.slice(0,-1).join(", ")+(a.length>2?",":"")+" and "+a[a.length-1]; }
+function scopeChanged(){
+  const c=cellOf(sel.id,sel.tactic), na=!!(c&&c.na), rs=(c&&c.naReason)||"";
+  return na!==draft.origNA || (na && rs!==draft.origReason);
+}
+// The "also under other tactics" option and the kept-work warning in the panel.
+function updateScopeExtras(){
+  if(!sel||!draft) return;
+  const c=cellOf(sel.id,sel.tactic), isNA=!!(c&&c.na);
+  const others=byId[sel.id].tactics.filter(x=>x!==sel.tactic);
+  const show=others.length>0 && scopeChanged();
+  $("#pNAAllBox").hidden=!show;
+  if(show){
+    $("#pNAAll").checked=draft.naAll;
+    $("#pNAAllText").textContent=(isNA?"Also exclude it under ":"Also restore it under ")+joinAnd(others.map(tacName));
+  }
+  const kept=[];
+  if(isNA){
+    const n=c.list.length;
+    if(n) kept.push(n+" control"+(n===1?" is":"s are")+" recorded here. "+(n===1?"It is":"They are")+
+      " kept but hidden while this technique is out of scope, and come"+(n===1?"s":"")+" back if you restore it.");
+    else if(c.none) kept.push("A confirmed gap is recorded here. It is kept but hidden while this technique is out of scope, and comes back if you restore it.");
+    if(show && draft.naAll){
+      const w=others.filter(o=>{ const x=k(sel.id,o); return keyWork(x) && !keyNA(x); }).length;
+      if(w) kept.push(w+" of its other tactic placements "+(w===1?"has":"have")+" work recorded, which is kept the same way.");
+    }
+  }
+  const kn=$("#pNAKeep"); kn.hidden=!kept.length; kn.textContent=kept.join(" ");
+}
+// Apply this technique's scope change to its other tactics. A sibling's rationale is only
+// replaced when it is blank or still matches what this one said before the edit.
+function propagateScope(id,tac,oldReason){
+  const c=cellOf(id,tac), na=!!(c&&c.na), rs=(c&&c.naReason)||"";
+  byId[id].tactics.filter(x=>x!==tac).forEach(o=>{
+    if(na){
+      const s=ensure(id,o); s.na=true;
+      const cur=s.naReason||"";
+      if(!clean(cur) || cur===oldReason) s.naReason=rs;
+    } else {
+      const s=cellOf(id,o);
+      if(s&&s.na){ s.na=false; s.naReason=""; prune(id,o); }
+    }
+  });
 }
 
 function ctlEl(m,i,nUses){
@@ -744,30 +1023,31 @@ function ctlEl(m,i,nUses){
     '<p class="sl">'+(m.score!==null?esc(SCALE[m.score][0]+" — "+SCALE[m.score][1]):"Unscored")+'</p>'+
     '<textarea placeholder="Notes and evidence for this technique" data-f="note">'+esc(m.note)+'</textarea>';
   const own=d.querySelector('[data-f=owner]');
-  own.oninput=e=>{ if(registry[m.cid]){ registry[m.cid].owner=e.target.value; persist(); } };
+  own.oninput=e=>{ if(registry[m.cid]){ registry[m.cid].owner=e.target.value; updateDirtyUI(); } };
   own.onchange=e=>{
     if(!registry[m.cid]) return;
     const v=canonOwner(e.target.value, m.cid);
     registry[m.cid].owner=v; e.target.value=v;
-    syncOwners(); refreshStats(); if(view!=="matrix") renderViews();
+    syncOwners(); refreshStats(); updateDirtyUI();
   };
   d.querySelector('[data-f=note]').oninput=e=>mut(i,x=>x.note=e.target.value);
   d.querySelector(".rm").onclick=()=>{
     const cc=ensure(sel.id,sel.tactic); cc.list.splice(i,1);
-    prune(sel.id,sel.tactic); openPanel(sel.id,sel.tactic); refresh();
+    prune(sel.id,sel.tactic); renderPanel(); refresh();
   };
   d.querySelectorAll(".scale button").forEach(b=>{
     b.onclick=()=>{const v=Number(b.dataset.v);
       mut(i,x=>x.score=(x.score===v?null:v));
-      openPanel(sel.id,sel.tactic); refresh();};
+      renderPanel(); refresh();};
   });
   return d;
 }
-function mut(i,fn){
-  const c=ensure(sel.id,sel.tactic);
+function mutAt(id,tac,i,fn){
+  const c=ensure(id,tac);
   const item={...c.list[i]}; fn(item); c.list[i]=item;
-  refreshStats(); if(view!=="matrix") renderViews();
+  refreshStats(); if(view==="inv"||view==="rep") renderViews();
 }
+function mut(i,fn){ mutAt(sel.id,sel.tactic,i,fn); updateDirtyUI(); }
 
 /* ---------------- control picker ---------------- */
 function matchScore(q,c){
@@ -784,10 +1064,10 @@ function matchScore(q,c){
   if(!s && c.owner && norm(c.owner).includes(q)) s=30;
   return s;
 }
-function pickOptions(query){
+function pickOptions(query,ctx){
   const q=norm(query), raw=clean(query);
   const idx=usesIndex();
-  const inCell=new Set(((cellOf(sel.id,sel.tactic)||{list:[]}).list).map(m=>m.cid));
+  const inCell=new Set(((cellOf(ctx.id,ctx.tac)||{list:[]}).list).map(m=>m.cid));
   const all=Object.values(registry);
   let ranked;
   if(!q){
@@ -809,15 +1089,18 @@ function defaultActive(o){
   const cr=o.items.findIndex(x=>x.kind==="create");
   return cr;
 }
-function pickerEl(){
+// A combobox for adding a control to one technique. Used by the panel and by list rows,
+// so it carries its own target (ctx) and element id prefix rather than reading "sel".
+function pickerEl(ctx,pre,onChoose,onCancel){
   const w=document.createElement("div"); w.className="picker";
-  w.innerHTML='<label class="plab" for="pickIn">Add a control</label>'+
-    '<div class="prow"><input type="text" id="pickIn" autocomplete="off" role="combobox" aria-expanded="true" '+
-    'aria-controls="pickList" aria-autocomplete="list" placeholder="Search existing controls or name a new one">'+
-    '<button class="btn" id="pickCancel">Cancel</button></div>'+
-    '<div class="plist" id="pickList" role="listbox"></div>';
-  const inp=w.querySelector("#pickIn"), listEl=w.querySelector("#pickList");
-  let opts={items:[]};
+  const inId=pre+"PickIn", lsId=pre+"PickList", oid=i=>pre+"po"+i;
+  w.innerHTML='<label class="plab" for="'+inId+'">Add a control</label>'+
+    '<div class="prow"><input type="text" id="'+inId+'" autocomplete="off" role="combobox" aria-expanded="true" '+
+    'aria-controls="'+lsId+'" aria-autocomplete="list" placeholder="Search existing controls or name a new one">'+
+    '<button class="btn" data-pcancel>Cancel</button></div>'+
+    '<div class="plist" id="'+lsId+'" role="listbox"></div>';
+  const inp=w.querySelector("input"), listEl=w.querySelector(".plist");
+  let opts={items:[]}, active=-1;
   const draw=()=>{
     const it=opts.items;
     let h="";
@@ -825,46 +1108,46 @@ function pickerEl(){
     it.forEach((x,i)=>{
       if(x.kind==="create" && opts.similarFound)
         h+='<p class="phint">Similar controls already exist above. Pick one if it is the same control.</p>';
-      const on=i===pickActive;
+      const on=i===active;
       if(x.kind==="existing"){
-        h+='<div class="popt'+(on?" on":"")+(x.disabled?" dis":"")+'" id="po'+i+'" data-i="'+i+'" role="option" aria-selected="'+on+'"'+
+        h+='<div class="popt'+(on?" on":"")+(x.disabled?" dis":"")+'" id="'+oid(i)+'" data-i="'+i+'" role="option" aria-selected="'+on+'"'+
           (x.disabled?' aria-disabled="true"':'')+'><b>'+esc(x.c.name)+'</b><small>'+
           (x.c.owner?esc(x.c.owner):"No owner")+' &middot; '+
           (x.disabled?"Already on this technique":x.uses+" use"+(x.uses===1?"":"s"))+'</small></div>';
       } else {
-        h+='<div class="popt create'+(on?" on":"")+'" id="po'+i+'" data-i="'+i+'" role="option" aria-selected="'+on+'">'+
+        h+='<div class="popt create'+(on?" on":"")+'" id="'+oid(i)+'" data-i="'+i+'" role="option" aria-selected="'+on+'">'+
           '<b>Create &ldquo;'+esc(x.name)+'&rdquo;</b><small>New control</small></div>';
       }
     });
     listEl.innerHTML=h;
-    inp.setAttribute("aria-activedescendant", pickActive>=0?"po"+pickActive:"");
+    inp.setAttribute("aria-activedescendant", active>=0?oid(active):"");
     const a=listEl.querySelector(".popt.on"); if(a) a.scrollIntoView({block:"nearest"});
   };
-  const recompute=()=>{ opts=pickOptions(inp.value); pickActive=defaultActive(opts); draw(); };
+  const recompute=()=>{ opts=pickOptions(inp.value,ctx); active=defaultActive(opts); draw(); };
   const move=dir=>{
     const it=opts.items; if(!it.length) return;
-    let i=pickActive;
-    for(let n=0;n<it.length;n++){ i=(i+dir+it.length)%it.length; if(!it[i].disabled){ pickActive=i; break; } }
+    let i=active;
+    for(let n=0;n<it.length;n++){ i=(i+dir+it.length)%it.length; if(!it[i].disabled){ active=i; break; } }
     draw();
   };
   inp.oninput=recompute;
   inp.onkeydown=e=>{
     if(e.key==="ArrowDown"){ e.preventDefault(); move(1); }
     else if(e.key==="ArrowUp"){ e.preventDefault(); move(-1); }
-    else if(e.key==="Enter"){ e.preventDefault(); if(pickActive>=0) choose(opts.items[pickActive]); }
-    else if(e.key==="Escape"){ e.preventDefault(); e.stopPropagation(); cancelPick(); }
+    else if(e.key==="Enter"){ e.preventDefault(); if(active>=0) onChoose(opts.items[active]); }
+    else if(e.key==="Escape"){ e.preventDefault(); e.stopPropagation(); onCancel(); }
   };
   listEl.onmousedown=e=>e.preventDefault();
   listEl.onclick=e=>{
     const o=e.target.closest(".popt"); if(!o) return;
-    choose(opts.items[Number(o.dataset.i)]);
+    onChoose(opts.items[Number(o.dataset.i)]);
   };
-  w.querySelector("#pickCancel").onclick=cancelPick;
+  w.querySelector("[data-pcancel]").onclick=onCancel;
   setTimeout(()=>{ recompute(); inp.focus(); },0);
   return w;
 }
-function choose(x){
-  if(!x || x.disabled || !sel) return;
+function addControlTo(ctx,x){
+  if(!x || x.disabled) return null;
   let cid, isNew=false;
   if(x.kind==="existing") cid=x.c.id;
   else {
@@ -872,29 +1155,31 @@ function choose(x){
     if(ex) cid=ex.id;
     else { const c={id:newId(),name:clean(x.name),owner:""}; registry[c.id]=c; cid=c.id; isNew=true; }
   }
-  const cell=ensure(sel.id,sel.tactic);
-  if(cell.list.some(m=>m.cid===cid)) return;
+  const cell=ensure(ctx.id,ctx.tac);
+  if(cell.list.some(m=>m.cid===cid)) return null;
   cell.list.push({cid,score:null,note:""});
-  picking=false; pickActive=-1;
-  syncOwners();
-  openPanel(sel.id,sel.tactic); refresh();
-  const cards=$("#pCtls").querySelectorAll(".ctl");
-  const last=cards[cards.length-1];
+  return {cid,isNew};
+}
+function panelChoose(x){
+  if(!sel) return;
+  const r=addControlTo({id:sel.id,tac:sel.tactic},x); if(!r) return;
+  picking=false; syncOwners();
+  renderPanel(); refresh();
+  const cards=$("#pCtls").querySelectorAll(".ctl"), last=cards[cards.length-1];
   if(last){
-    const target=isNew ? last.querySelector('[data-f=owner]') : last.querySelector(".scale button");
+    const target=r.isNew ? last.querySelector('[data-f=owner]') : last.querySelector(".scale button");
     if(target) target.focus();
   }
 }
-function cancelPick(){
-  picking=false; pickActive=-1;
-  if(sel){ prune(sel.id,sel.tactic); openPanel(sel.id,sel.tactic); $("#pAdd").focus(); }
+function panelCancelPick(){
+  picking=false;
+  if(sel){ prune(sel.id,sel.tactic); renderPanel(); $("#pAdd").focus(); }
 }
 $("#pAdd").onclick=()=>{
   if(!sel) return;
   const c=cellOf(sel.id,sel.tactic);
   if(c&&(c.none||c.na)) return;
-  picking=true; pickActive=-1;
-  openPanel(sel.id,sel.tactic);
+  picking=true; renderPanel();
 };
 
 $("#pNone").onchange=e=>{
@@ -903,37 +1188,73 @@ $("#pNone").onchange=e=>{
   c.none=e.target.checked;
   if(c.none){ c.list=[]; c.na=false; c.naReason=""; picking=false; }
   prune(sel.id,sel.tactic);
-  openPanel(sel.id,sel.tactic); refresh();
+  renderPanel(); refresh();
 };
+// Excluding keeps the controls and any confirmed gap; they are hidden, not deleted.
 $("#pNA").onchange=e=>{
   if(!sel) return;
   const c=ensure(sel.id,sel.tactic);
   c.na=e.target.checked;
-  if(c.na){ c.none=false; c.list=[]; picking=false; } else { c.naReason=""; }
+  if(c.na){ picking=false; } else { c.naReason=""; }
   prune(sel.id,sel.tactic);
-  openPanel(sel.id,sel.tactic); refresh();
+  renderPanel(); refresh();
+  if(c.na) $("#pNAReason").focus();
 };
 $("#pNAReason").oninput=e=>{
   if(!sel) return;
   const c=ensure(sel.id,sel.tactic);
   c.naReason=e.target.value;
-  refreshStats(); if(view!=="matrix") renderViews();
+  refreshStats(); updateScopeExtras(); updateDirtyUI();
 };
+$("#pNAAll").onchange=e=>{ if(draft){ draft.naAll=e.target.checked; updateScopeExtras(); } };
 $("#pGuideToggle").onclick=()=>{
   const g=$("#pGuide"), on=g.classList.toggle("on");
   $("#pGuideToggle").setAttribute("aria-expanded",String(on));
 };
-function closePanel(){
+
+function savePanel(){
+  if(!sel) return;
+  const id=sel.id, tac=sel.tactic;
+  if(draft && draft.naAll && scopeChanged()) propagateScope(id,tac,draft.origReason);
+  prune(id,tac);
+  draft=null;
+  refresh(); closePanelUI();
+}
+function discardPanel(){
+  if(draft){ const s=JSON.parse(draft.snap); state=s.state; registry=s.registry; draft=null; syncOwners(); }
+  refresh(); closePanelUI();
+}
+function requestClose(){ if(!sel) return; if(isDirty()) askUnsaved(null); else discardPanel(); }
+function askUnsaved(next){
+  const t=byId[sel.id];
+  showDialog({
+    title:"Save changes to "+t.id+"?",
+    html:'<p>You changed '+esc(t.name)+' under '+esc(tacName(sel.tactic))+'. Save the changes, or discard them to put it back the way it was.</p>',
+    actions:[
+      {label:"Save changes",kind:"primary",onClick:()=>{ closeDialog(); savePanel(); if(next) next(); return false; }},
+      {label:"Discard changes",onClick:()=>{ closeDialog(); discardPanel(); if(next) next(); return false; }},
+      {label:"Keep editing"}
+    ]
+  });
+}
+function closePanelUI(){
   const was=sel;
   $("#panel").classList.remove("open"); $("#panel").setAttribute("aria-hidden","true");
   $("#scrim").classList.remove("on");
   if(was){ prune(was.id,was.tactic); }
-  sel=null; picking=false; pickActive=-1; renderMatrix();
-  if(was && view==="matrix"){
+  sel=null; picking=false; applyInert();
+  if(view==="matrix") renderMatrix();
+  if(!was) return;
+  if(view==="matrix"){
     const el=document.querySelector('.cell[data-id="'+was.id+'"][data-tac="'+was.tactic+'"]');
     if(el) el.focus({preventScroll:true});
+  } else if(view==="list"){
+    const row=listRowEl(k(was.id,was.tactic)), b=row&&row.querySelector('[data-act=open]');
+    if(b) b.focus({preventScroll:true});
   }
 }
+// Closes without saving or reverting; used when the whole assessment is replaced.
+function closePanel(){ draft=null; closePanelUI(); }
 
 /* ---------------- aggregates ---------------- */
 function cells(){
@@ -976,12 +1297,12 @@ function spread(e){
 }
 // One row per registered control, with every technique it is used on.
 function invData(){
-  const idx=usesIndex();
+  const idx=usesIndex(), allIdx=usesIndex(true);
   return Object.values(registry).map(c=>{
     const u=(idx[c.id]||[]).slice().sort((a,b)=>
       (b.score===null?-1:b.score)-(a.score===null?-1:a.score) || a.t.id.localeCompare(b.t.id));
     const sc=u.filter(x=>x.score!==null);
-    return {c,u,sc,uns:u.length-sc.length,sp:sc.length?spread(sc):null};
+    return {c,u,sc,uns:u.length-sc.length,sp:sc.length?spread(sc):null,h:(allIdx[c.id]||[]).length-u.length};
   });
 }
 const inUseCount = () => invData().filter(r=>r.u.length).length;
@@ -992,7 +1313,10 @@ function refreshStats(){
   $("#kControls").textContent=inUseCount();
   $("#kMean").textContent=cs.length?(cs.reduce((a,x)=>a+x.roll,0)/cs.length).toFixed(2):"—";
   $("#kGaps").textContent=cs.filter(x=>x.roll<=1).length;
-  $("#kNA").textContent=naCells().length;
+  const nas=naCells(), nr=nas.filter(x=>!x.reason).length, nrb=$("#kNR");
+  $("#kNA").textContent=nas.length;
+  nrb.hidden=!nr; nrb.textContent=nr+" no rationale";
+  nrb.title="Show the "+nr+" exclusion"+(nr===1?"":"s")+" without a rationale";
   updateBrand();
   persist();
 }
@@ -1001,15 +1325,21 @@ function updateBrand(){
   $("#brandSub").innerHTML='MITRE Fight Fraud Framework v1.1 &middot; 8 tactics &middot; 123 techniques'+
     (d?' &middot; Current as of '+esc(d):'');
 }
+let lastSaved=null;
 function persist(){
+  if(draft) return;   // an open panel saves on Save, not as you type
   if(!storageOK || storageLocked) return;
-  try{ localStorage.setItem(SKEY, JSON.stringify({state,registry,meta,v:F3_VERSION,schema:SCHEMA,savedAt:new Date().toISOString()})); }catch(e){}
+  try{
+    localStorage.setItem(SKEY, JSON.stringify({state,registry,meta,v:F3_VERSION,schema:SCHEMA,savedAt:new Date().toISOString()}));
+    lastSaved=new Date(); if(view==="list") updateSavedNote();
+  }catch(e){}
 }
 function syncOwners(){
   const dl=$("#ownerList");
   if(dl) dl.innerHTML=allOwners().map(o=>'<option value="'+esc(o)+'"></option>').join("");
 }
-function refresh(){ refreshStats(); renderMatrix(); if(view!=="matrix") renderViews(); }
+function rerenderView(){ if(view==="matrix") renderMatrix(); else if(view==="list") renderList(); }
+function refresh(){ refreshStats(); rerenderView(); if(view==="inv"||view==="rep") renderViews(); updateBulk(); }
 
 function barHTML(d,total){
   const seg=[[0,"var(--s0)"],[1,"var(--s1)"],[2,"var(--s2)"],[3,"var(--s3)"]]
@@ -1050,7 +1380,7 @@ function renameOwner(from,to){
 }
 function afterRegistryChange(){
   syncOwners(); refresh();
-  if(sel) openPanel(sel.id,sel.tactic);
+  if(sel) renderPanel();
 }
 let lastPairs=[], lastOwnerPairs=[];
 function dupPairs(){
@@ -1133,7 +1463,7 @@ function dupeClick(e){
   if(b.dataset.dm!==undefined){
     const p=lastPairs[Number(b.dataset.dm)]; if(!p) return;
     const keep=b.dataset.keep==="a"?p.a:p.b, drop=b.dataset.keep==="a"?p.b:p.a;
-    const n=(usesIndex()[drop.id]||[]).length;
+    const n=(usesIndex(true)[drop.id]||[]).length;
     if(!confirm('Merge "'+drop.name+'" into "'+keep.name+'"? Its '+n+' use'+(n===1?'':'s')+
       ' will move over. Where both are on the same technique, the higher score is kept and the notes are combined.')) return;
     mergeControls(drop.id,keep.id); afterRegistryChange();
@@ -1224,6 +1554,7 @@ function cardHTML(r){
     head='<div class="ihead"><b>'+esc(c.name)+'</b>'+
       (clean(c.owner)?'<span class="iown">'+esc(c.owner)+'</span>':'<span class="iown none">No owner</span>')+
       '<span class="imeta">'+r.u.length+' technique'+(r.u.length===1?'':'s')+'</span>'+pill+
+      (r.h?'<span class="imeta">Also kept on '+r.h+' out-of-scope technique'+(r.h===1?'':'s')+'</span>':'')+
       '<span class="spacer"></span><span class="iacts">'+
       '<button class="lnk" data-act="edit" data-id="'+c.id+'">Edit</button>'+
       (Object.keys(registry).length>1?'<button class="lnk" data-act="merge" data-id="'+c.id+'">Merge</button>':'')+
@@ -1278,14 +1609,15 @@ function invClick(e){
   else if(act==="domerge"){
     const target=$("#mt_"+id).value, src=registry[id], dst=registry[target];
     if(!src||!dst) return;
-    const n=(usesIndex()[id]||[]).length;
+    const n=(usesIndex(true)[id]||[]).length;
     if(!confirm('Merge "'+src.name+'" into "'+dst.name+'"? Its '+n+' use'+(n===1?'':'s')+' will move over. This cannot be undone, so export first if you may want to go back.')) return;
     mergeControls(id,target); inv.merge=null; afterRegistryChange();
   }
   else if(act==="del"){
     const c=registry[id]; if(!c) return;
-    const n=(usesIndex()[id]||[]).length;
-    if(!confirm(n ? 'Delete "'+c.name+'" and remove it from '+n+' technique'+(n===1?'':'s')+'? Its scores and notes there will be lost.'
+    const n=(usesIndex(true)[id]||[]).length, hn=n-(usesIndex()[id]||[]).length;
+    if(!confirm(n ? 'Delete "'+c.name+'" and remove it from '+n+' technique'+(n===1?'':'s')+
+                    (hn?' ('+hn+' of them out of scope)':'')+'? Its scores and notes there will be lost.'
                   : 'Delete "'+c.name+'"?')) return;
     deleteControl(id); afterRegistryChange();
   }
@@ -1464,10 +1796,12 @@ function buildReport(){
   if(repOpts.scope){
     const na=naCells().sort((a,b)=>a.t.id.localeCompare(b.t.id));
     out+='<h2>Scope exclusions</h2>';
+    const nr=na.filter(x=>!x.reason).length;
+    if(nr) out+='<p class="note">'+nr+' of '+na.length+' exclusion'+(na.length===1?' has':'s have')+' no rationale recorded.</p>';
     out+= na.length
       ? '<table class="ct"><tr><th>ID</th><th>Technique</th><th>Tactic</th><th>Rationale</th></tr>'+
         na.map(x=>'<tr><td>'+x.t.id+'</td><td>'+esc(x.t.name)+'</td><td>'+esc(tacName(x.tac))+'</td>'+
-          '<td>'+esc(x.reason||"—")+'</td></tr>').join("")+'</table>'
+          '<td>'+(x.reason?esc(x.reason):'<i style="color:#A6572E">No rationale recorded</i>')+'</td></tr>').join("")+'</table>'
       : '<p>No techniques excluded from scope.</p>';
   }
 
@@ -1539,7 +1873,8 @@ function exportJSON(){
       techniques.push({techniqueID:id,tactic:tac,enabled:false,
         comment:"Out of scope."+(c.naReason?" "+c.naReason:""),
         metadata:[],links:[],showSubtechniques:false,
-        f3_na:true,f3_naReason:c.naReason||""});
+        f3_na:true,f3_naReason:c.naReason||"",f3_noControl:!!c.none,
+        f3_controls:c.list.map(m=>({cid:m.cid,name:ctlName(m.cid),owner:ctlOwner(m.cid),score:m.score,note:m.note}))});
       return;
     }
     // Techniques whose controls are all unscored are exported without a score so nothing is lost.
@@ -1599,7 +1934,8 @@ function importJSON(file){
       if(!t.techniqueID||!t.tactic) return;
       if(!byId[t.techniqueID]){dropped++;return;}
       if(t.f3_na){
-        state[k(t.techniqueID,t.tactic)]={none:false,na:true,naReason:t.f3_naReason||"",list:[]};
+        const kept=Array.isArray(t.f3_controls)?normalizeList(t.f3_controls):[];
+        state[k(t.techniqueID,t.tactic)]={none:!!t.f3_noControl,na:true,naReason:t.f3_naReason||"",list:kept};
         return;
       }
       let list=Array.isArray(t.f3_controls)?t.f3_controls:null;
@@ -1612,27 +1948,487 @@ function importJSON(file){
       if(none||list.length) state[k(t.techniqueID,t.tactic)]={none,na:false,naReason:"",list};
     });
     if(dropped) alert(dropped+" entr"+(dropped===1?"y":"ies")+" referenced technique IDs not in F3 v"+F3_VERSION+" and were skipped.");
+    picked.clear(); lastPick=null;
     hideRestore(); syncOwners(); closePanel(); refresh();
   };
   fr.readAsText(file);
 }
 
-/* ---------------- wiring ---------------- */
-$("#q").oninput=renderMatrix;
-$("#fSrc").onchange=renderMatrix;
-$("#fScore").onchange=renderMatrix;
-$("#pClose").onclick=closePanel;
-$("#scrim").onclick=closePanel;
-document.onkeydown=e=>{if(e.key==="Escape" && sel) closePanel();};
+/* ---------------- dialogs ---------------- */
+let dlg=null;
+// Keep keyboard focus inside whatever is on top: a dialog, else the panel, else the page.
+function applyInert(){
+  const busy=!!sel||!!dlg;
+  ["header",".tabs","#fwBar","main",".appfoot","#bulk","#restoreNote","#storeNote"].forEach(q=>{
+    const el=document.querySelector(q); if(el) el.inert=busy; });
+  $("#panel").inert=!!dlg||!sel;
+}
+function showDialog(o){
+  if(dlg) closeDialog();
+  const root=$("#dlg");
+  root.innerHTML='<div class="dbox" role="dialog" aria-modal="true" aria-labelledby="dTitle">'+
+    '<h3 id="dTitle">'+esc(o.title)+'</h3><div class="dbody">'+(o.html||"")+'</div>'+
+    '<div class="dacts2">'+o.actions.map((a,i)=>'<button class="btn'+(a.kind?" "+a.kind:"")+'"'+
+      (a.id?' id="'+a.id+'"':'')+' data-di="'+i+'">'+esc(a.label)+'</button>').join("")+'</div></div>';
+  dlg={o,prev:document.activeElement};
+  root.hidden=false; applyInert();
+  root.querySelectorAll("[data-di]").forEach(b=>{
+    b.onclick=()=>{
+      const a=o.actions[Number(b.dataset.di)];
+      const keep=a.onClick?a.onClick(root):undefined;
+      if(keep!==false && dlg && dlg.o===o) closeDialog(true);
+    };
+  });
+  root.onmousedown=e=>{ if(e.target===root) closeDialog(true); };
+  if(o.mount) o.mount(root);
+  const f=root.querySelector("textarea,input[type=text]")||root.querySelector(".btn.primary:not(:disabled)")||root.querySelector(".btn");
+  if(f) f.focus();
+}
+function closeDialog(restore){
+  if(!dlg) return;
+  const prev=dlg.prev; dlg=null;
+  const root=$("#dlg"); root.hidden=true; root.innerHTML="";
+  applyInert();
+  if(restore && prev && document.contains(prev) && prev.offsetParent!==null) prev.focus({preventScroll:true});
+}
 
+/* ---------------- selection and bulk scope ---------------- */
+let selecting=false, lastPick=null; const picked=new Set();
+const keyNA=key=>!!(state[key]&&state[key].na);
+const keyWork=key=>{ const c=state[key]; return !!(c&&(c.none||c.list.length)); };
+const keyLabel=key=>{ const id=key.split("|")[0]; return id+" "+byId[id].name.replace(/^.*?: /,""); };
+function setSelecting(on){
+  selecting=on;
+  if(!on){ picked.clear(); lastPick=null; }
+  document.body.classList.toggle("selecting",on);
+  $("#bSelect").setAttribute("aria-pressed",String(on));
+  rerenderView(); updateBulk();
+}
+function togglePick(key,range){
+  if(range && lastPick && lastPick!==key){
+    const order=shownRows().map(r=>r.key);
+    let a=order.indexOf(lastPick), b=order.indexOf(key);
+    if(a>=0 && b>=0){ if(a>b){ const x=a; a=b; b=x; } order.slice(a,b+1).forEach(x=>picked.add(x)); }
+    else picked.add(key);
+  } else if(picked.has(key)) picked.delete(key);
+  else picked.add(key);
+  lastPick=key;
+  if(!selecting){
+    selecting=true; document.body.classList.add("selecting");
+    $("#bSelect").setAttribute("aria-pressed","true");
+  }
+  updatePickedMarks(); updateBulk();
+}
+function updatePickedMarks(){
+  document.querySelectorAll("#matrix .cell").forEach(el=>{
+    const on=picked.has(k(el.dataset.id,el.dataset.tac));
+    el.classList.toggle("picked",on);
+    if(selecting){ el.setAttribute("role","checkbox"); el.setAttribute("aria-checked",String(on)); }
+  });
+  document.querySelectorAll("#viewList .lrow").forEach(el=>{
+    const on=picked.has(el.dataset.key), cb=el.querySelector("[data-act=pick]");
+    el.classList.toggle("picked",on); if(cb) cb.checked=on;
+  });
+}
+// Bulk actions only touch selected techniques that are on screen, so changing a filter
+// can never make them act on something you can no longer see.
+function actionable(){ const vis=new Set(shownRows().map(r=>r.key)); return [...picked].filter(x=>vis.has(x)); }
+function updateBulk(){
+  const on=selecting && (view==="matrix"||view==="list");
+  $("#bulk").hidden=!on; document.body.classList.toggle("hasbulk",on);
+  if(!on) return;
+  const act=actionable(), hid=picked.size-act.length, na=act.filter(keyNA).length;
+  $("#bCount").textContent=act.length?act.length+" selected":"None selected";
+  $("#bHint").textContent=(view==="matrix"?"Click techniques to select them":"Click rows to select them")+
+    ", then exclude them, restore them, or add a rationale. Shift-click selects a range.";
+  $("#bHidden").textContent=hid?hid+" more selected but hidden by the current filters. They won't change.":"";
+  $("#bxClear").disabled=!picked.size;
+  $("#bxAll").hidden=false;
+  $("#bxExclude").disabled=!(act.length-na);
+  $("#bxReason").disabled=!na;
+  $("#bxRestore").disabled=!na;
+}
+function afterBulk(){ refreshStats(); rerenderView(); updateBulk(); }
+function siblingKeys(keys){
+  const have=new Set(keys), out=[];
+  keys.forEach(key=>{
+    const id=key.split("|")[0];
+    byId[id].tactics.forEach(o=>{ const x=k(id,o); if(!have.has(x)){ have.add(x); out.push(x); } });
+  });
+  return out;
+}
+function sibDesc(sib,one){
+  return one ? joinAnd(sib.map(x=>tacName(x.split("|")[1])))
+             : sib.length+" more, where the same techniques appear under other tactics";
+}
+const useSib=root=>{ const c=root.querySelector("#dSib"); return !!(c&&c.checked); };
+const sibLabel=(verb,one,n)=>'Also '+verb+' '+(one?'it':'them')+' under '+
+  (one?'its other tactic'+(n===1?'':'s'):'their other tactics');
+const skipNote=(n,what)=>n?'<p class="dnote">'+n+' selected '+(n===1?'technique is':'techniques are')+' '+what+' and won&rsquo;t change.</p>':'';
+
+function excludeDialog(keys,done){
+  const tg=keys.filter(x=>!keyNA(x)); if(!tg.length) return;
+  const sib=siblingKeys(tg).filter(x=>!keyNA(x)), one=tg.length===1;
+  showDialog({
+    title: one ? "Exclude "+keyLabel(tg[0])+" from scope" : "Exclude "+tg.length+" techniques from scope",
+    html:'<label class="dfld" for="dReason">Rationale (optional)</label>'+
+      '<textarea id="dReason" placeholder="Why is this out of scope? e.g., no ATM channel, product not offered"></textarea>'+
+      '<p class="dnote">Exclusions without a rationale are flagged in the report. You can add one later.</p>'+
+      (sib.length?'<label class="dchk"><input type="checkbox" id="dSib" checked><span>'+sibLabel("exclude",one,sib.length)+
+        '<small>'+esc(sibDesc(sib,one))+'</small></span></label>':'')+
+      skipNote(keys.length-tg.length,"already out of scope")+
+      '<div class="dwarn" id="dWarn" hidden></div>',
+    actions:[{id:"dGo",label:"Exclude",kind:"primary",onClick:root=>{
+        const all=tg.concat(useSib(root)?sib:[]), reason=clean(root.querySelector("#dReason").value);
+        all.forEach(x=>{ const [id,tac]=x.split("|"); const c=ensure(id,tac); c.na=true;
+          if(reason && !clean(c.naReason)) c.naReason=reason; });
+        if(done) done();
+      }},{label:"Cancel"}],
+    mount:root=>{
+      const upd=()=>{
+        const all=tg.concat(useSib(root)?sib:[]), work=all.filter(keyWork), wn=$("#dWarn");
+        root.querySelector("#dGo").textContent=all.length===1?"Exclude from scope":"Exclude all "+all.length;
+        let msg="";
+        if(all.length===1 && work.length){
+          const c=state[all[0]], n=c.list.length;
+          msg=(n?"This technique has "+n+" control"+(n===1?"":"s")+" recorded.":"This technique has a confirmed gap recorded.")+
+            " That work is kept but hidden while it is out of scope, and comes back if you restore it.";
+        } else if(work.length){
+          msg=work.length+" of these have controls or a confirmed gap recorded. That work is kept but hidden while they are out of scope, and comes back if you restore them.";
+        }
+        wn.hidden=!msg; wn.textContent=msg;
+      };
+      const sb=root.querySelector("#dSib"); if(sb) sb.onchange=upd;
+      upd();
+    }
+  });
+}
+function rationaleDialog(keys,done){
+  const tg=keys.filter(keyNA); if(!tg.length) return;
+  const has=tg.filter(x=>clean(state[x].naReason)).length, one=tg.length===1;
+  showDialog({
+    title: one ? "Add a rationale to "+keyLabel(tg[0]) : "Add a rationale to "+tg.length+" excluded techniques",
+    html:'<label class="dfld" for="dReason">Rationale</label>'+
+      '<textarea id="dReason" placeholder="Why '+(one?'is this':'are these')+' out of scope? e.g., no ATM channel, product not offered"></textarea>'+
+      (has?'<label class="dchk"><input type="checkbox" id="dRep"><span>'+
+        (one?'Replace the rationale already recorded':'Replace the rationale already recorded on '+has+' of them')+
+        '<small>Left unticked, only techniques without a rationale get this one.</small></span></label>':'')+
+      skipNote(keys.length-tg.length,"in scope")+
+      '<p class="dnote" id="dApplies"></p>',
+    actions:[{id:"dGo",label:"Add rationale",kind:"primary",onClick:root=>{
+        const reason=clean(root.querySelector("#dReason").value); if(!reason) return false;
+        const rp=root.querySelector("#dRep"), replace=!!(rp&&rp.checked);
+        tg.forEach(x=>{ const c=state[x]; if(replace||!clean(c.naReason)) c.naReason=reason; });
+        if(done) done();
+      }},{label:"Cancel"}],
+    mount:root=>{
+      const go=root.querySelector("#dGo"), ta=root.querySelector("#dReason"), rp=root.querySelector("#dRep");
+      const upd=()=>{
+        const n=(rp&&rp.checked)?tg.length:tg.length-has;
+        go.disabled=!clean(ta.value)||!n;
+        root.querySelector("#dApplies").textContent=n
+          ? (one?"":"Applies to "+n+" technique"+(n===1?"":"s")+".")
+          : (one?"It already has a rationale. Tick replace to overwrite it.":"Every selected technique already has a rationale. Tick replace to overwrite them.");
+      };
+      ta.oninput=upd; if(rp) rp.onchange=upd;
+      upd();
+    }
+  });
+}
+function restoreDialog(keys,done){
+  const tg=keys.filter(keyNA); if(!tg.length) return;
+  const sib=siblingKeys(tg).filter(keyNA), one=tg.length===1;
+  showDialog({
+    title: one ? "Restore "+keyLabel(tg[0])+" to scope" : "Restore "+tg.length+" techniques to scope",
+    html:'<p>'+(one?'It counts':'They count')+' toward coverage again, and '+(one?'its':'their')+' out-of-scope rationale is cleared.</p>'+
+      (sib.length?'<label class="dchk"><input type="checkbox" id="dSib" checked><span>'+sibLabel("restore",one,sib.length)+
+        '<small>'+esc(sibDesc(sib,one))+'</small></span></label>':'')+
+      skipNote(keys.length-tg.length,"in scope")+
+      '<p class="dnote" id="dKept"></p>',
+    actions:[{id:"dGo",label:"Restore",kind:"primary",onClick:root=>{
+        tg.concat(useSib(root)?sib:[]).forEach(x=>{
+          const c=state[x]; if(!c) return; c.na=false; c.naReason="";
+          const [id,tac]=x.split("|"); prune(id,tac); });
+        if(done) done();
+      }},{label:"Cancel"}],
+    mount:root=>{
+      const upd=()=>{
+        const all=tg.concat(useSib(root)?sib:[]), w=all.filter(keyWork).length;
+        root.querySelector("#dGo").textContent=all.length===1?"Restore to scope":"Restore all "+all.length;
+        root.querySelector("#dKept").textContent=!w?"":(all.length===1
+          ? "The work recorded before it was excluded comes back."
+          : w+" of these have controls or a confirmed gap kept from before. That work comes back.");
+      };
+      const sb=root.querySelector("#dSib"); if(sb) sb.onchange=upd;
+      upd();
+    }
+  });
+}
+$("#bSelect").onclick=()=>setSelecting(!selecting);
+$("#bxDone").onclick=()=>setSelecting(false);
+$("#bxAll").onclick=()=>{ shownRows().filter(r=>r.match).forEach(r=>picked.add(r.key)); updatePickedMarks(); updateBulk(); };
+$("#bxClear").onclick=()=>{ picked.clear(); lastPick=null; updatePickedMarks(); updateBulk(); };
+$("#bxExclude").onclick=()=>excludeDialog(actionable(),afterBulk);
+$("#bxReason").onclick=()=>rationaleDialog(actionable(),afterBulk);
+$("#bxRestore").onclick=()=>restoreDialog(actionable(),afterBulk);
+
+/* ---------------- list view ---------------- */
+// Every technique in one scrolling list, scored inline. Edits save as you make them;
+// only the row that changed is redrawn, so focus stays where you are typing.
+let listPick=null;
+const LV=$("#viewList");
+function listRowEl(key){ return LV.querySelector('.lrow[data-key="'+key+'"]'); }
+function lgHeadHTML(sn){
+  const st=colStats(sn);
+  return '<h3>'+esc(tacName(sn))+'</h3><span class="ct">'+statLine(st)+'</span>'+
+    '<div class="colbar"><i style="width:'+st.pct+'%"></i></div>';
+}
+function lctlHTML(m,i){
+  const c=registry[m.cid]||{name:"Unknown control",owner:""}, nm=esc(c.name);
+  return '<div class="lctl" data-i="'+i+'">'+
+    '<span class="lcn" title="'+nm+'">'+nm+'</span>'+
+    '<input type="text" class="lown" data-fk="own'+i+'" list="ownerList" autocomplete="off" placeholder="Owner" value="'+esc(c.owner)+'" aria-label="Owner of '+nm+'">'+
+    '<div class="scale lscale" role="group" aria-label="Score for '+nm+'">'+[0,1,2,3].map(v=>
+      '<button data-act="score" data-v="'+v+'" data-fk="sc'+i+'_'+v+'" aria-pressed="'+(m.score===v)+'"'+
+      ' class="'+(m.score===v?"s"+v:"")+'" title="'+v+' '+SCALE[v][0]+'">'+v+'</button>').join("")+'</div>'+
+    '<textarea class="lnote" rows="1" data-fk="note'+i+'" placeholder="Notes and evidence" aria-label="Notes for '+nm+'">'+esc(m.note)+'</textarea>'+
+    '<button class="lrm" data-act="rm" data-fk="rm'+i+'" title="Remove from this technique" aria-label="Remove '+nm+' from this technique">&times;</button></div>';
+}
+function rowHTML(r){
+  const t=r.t, key=r.key, c=cellOf(t.id,r.tac), ro=roll(c), na=ro==="na", none=!!(c&&c.none&&!na);
+  const list=c?c.list:[], pk=picked.has(key);
+  let chip;
+  if(na) chip='<span class="pill">Out of scope</span>'+(clean(c.naReason)?'':'<span class="pill un">No rationale</span>');
+  else if(isNum(ro)) chip='<span class="pill s'+ro+'">'+ro+' '+SCALE[ro][0]+'</span>';
+  else if(list.length) chip='<span class="pill un">Needs scoring</span>';
+  else chip='<span class="pill lnone">Not assessed</span>';
+  let work;
+  if(na){
+    const n=list.length;
+    const kept=n?n+" control"+(n===1?" is":"s are")+" kept but hidden while this technique is out of scope."
+      :(c.none?"A confirmed gap is kept but hidden while this technique is out of scope.":"");
+    work='<div class="lna"><input type="text" class="lreason" data-fk="reason" placeholder="Rationale (optional). e.g., no ATM channel, product not offered"'+
+      ' value="'+esc(c.naReason||"")+'" aria-label="Out-of-scope rationale for '+t.id+'">'+
+      (kept?'<p class="lkept">'+kept+'</p>':'')+'</div>';
+  } else if(none){
+    work='<p class="lgap">No control in place. Recorded as a confirmed gap.</p>';
+  } else {
+    work=list.map((m,i)=>lctlHTML(m,i)).join("")+
+      (listPick===key?'<div data-pick></div>':'<button class="lnk" data-act="add" data-fk="add">+ Add control</button>');
+  }
+  return '<div class="lrow'+(r.isSub?' sub':'')+(na?' na':'')+(pk?' picked':'')+'" data-key="'+esc(key)+'" data-src="'+t.source+'">'+
+    '<div class="lsel"><input type="checkbox" data-act="pick" data-fk="chk"'+(pk?' checked':'')+' aria-label="Select '+t.id+'"></div>'+
+    '<div class="lid mono">'+t.id+'</div>'+
+    '<div class="lname"><button class="lopen" data-act="open" data-fk="open" title="Open technique details">'+esc(t.name.replace(/^.*?: /,""))+'</button>'+
+      '<div class="lmeta">'+chip+'<span class="ltog">'+
+        (na?'':'<button class="tog" data-act="none" data-fk="none" aria-pressed="'+none+'">No control</button>')+
+        '<button class="tog" data-act="na" data-fk="na" aria-pressed="'+na+'">Out of scope</button>'+
+      '</span></div></div>'+
+    '<div class="lwork">'+work+'</div></div>';
+}
+function fitNote(el){ el.style.height="auto"; el.style.height=(el.scrollHeight+2)+"px"; }
+function fitNotes(root){ root.querySelectorAll(".lnote").forEach(fitNote); }
+function updateSavedNote(){
+  const el=$("#lSaved"); if(!el) return;
+  if(!storageOK||storageLocked){ el.className="lsv warn"; el.textContent="Autosave is off in this browser, so export to keep your work."; return; }
+  el.className="lsv";
+  el.textContent=lastSaved?"Last saved "+lastSaved.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"})+".":"";
+}
+function renderList(){
+  const rows=shownRows();
+  let h='<div class="rowhead lhead"><h2>'+rows.length+' technique'+(rows.length===1?'':'s')+' shown</h2>'+
+    '<p>Scores: 0 None, 1 Partial, 2 Detective, 3 Preventive. Changes save as you make them. <span id="lSaved"></span></p></div>';
+  if(!rows.length){
+    LV.innerHTML=h+'<div class="empty">No techniques match these filters.</div>';
+    updateSavedNote(); return;
+  }
+  DATA.tactics.forEach(tac=>{
+    const sn=tac.shortname, rs=rows.filter(r=>r.tac===sn); if(!rs.length) return;
+    h+='<section class="lgrp" data-tac="'+sn+'"><div class="lghead">'+lgHeadHTML(sn)+'</div>'+rs.map(rowHTML).join("")+'</section>';
+  });
+  LV.innerHTML=h;
+  fitNotes(LV);
+  if(listPick){ const el=listRowEl(listPick); if(el) mountListPicker(el,listPick); else listPick=null; }
+  updateSavedNote();
+}
+function rowInfo(key){ const [id,tac]=key.split("|"), t=byId[id]; return {t,tac,isSub:!!t.isSub,key}; }
+function replaceRow(key,fk){
+  const el=listRowEl(key); if(!el) return null;
+  const a=document.activeElement, fkey=fk||(a&&el.contains(a)?a.dataset.fk:null);
+  const tmp=document.createElement("div"); tmp.innerHTML=rowHTML(rowInfo(key));
+  const nw=tmp.firstElementChild; el.replaceWith(nw); fitNotes(nw);
+  if(listPick===key) mountListPicker(nw,key);
+  else if(fkey){ const f=nw.querySelector('[data-fk="'+fkey+'"]'); if(f) f.focus({preventScroll:true}); }
+  return nw;
+}
+function rowChanged(key,fk){
+  replaceRow(key,fk);
+  refreshStats();
+  const g=LV.querySelector('.lgrp[data-tac="'+key.split("|")[1]+'"] .lghead');
+  if(g) g.innerHTML=lgHeadHTML(key.split("|")[1]);
+  updateBulk();
+}
+function mountListPicker(rowEl,key){
+  const slot=rowEl.querySelector("[data-pick]"); if(!slot) return;
+  const [id,tac]=key.split("|");
+  slot.appendChild(pickerEl({id,tac},"lp",x=>{
+    const r=addControlTo({id,tac},x); if(!r) return;
+    listPick=null; syncOwners(); rowChanged(key);
+    const lines=listRowEl(key).querySelectorAll(".lctl"), last=lines[lines.length-1];
+    if(last) (r.isNew?last.querySelector(".lown"):last.querySelector(".lscale button")).focus();
+  },()=>{ listPick=null; replaceRow(key,"add"); }));
+}
+function openListPicker(key){
+  const prev=listPick; listPick=key;
+  if(prev && prev!==key) replaceRow(prev);
+  replaceRow(key);
+}
+function toggleNone(key){
+  const [id,tac]=key.split("|"), c=cellOf(id,tac);
+  if(c&&c.none){ c.none=false; prune(id,tac); rowChanged(key,"none"); return; }
+  const n=c?c.list.length:0;
+  const go=()=>{ const cc=ensure(id,tac); cc.none=true; cc.list=[]; rowChanged(key,"none"); };
+  if(!n){ go(); return; }
+  showDialog({
+    title:"Record no control in place for "+id+"?",
+    html:'<p>This removes '+n+' control'+(n===1?'':'s')+' from this technique, along with '+(n===1?'its':'their')+
+      ' scores and notes here. The control'+(n===1?' stays':'s stay')+' in your inventory.</p>',
+    actions:[{label:"Remove and record gap",kind:"danger",onClick:()=>{ go(); }},{label:"Cancel"}]
+  });
+}
+// A row's scope toggle acts at once when nothing needs deciding. It asks first when the
+// technique has work to keep hidden or appears under other tactics.
+function toggleNA(key){
+  const [id,tac]=key.split("|");
+  if(keyNA(key)){
+    if(siblingKeys([key]).some(keyNA)) restoreDialog([key],()=>{ afterBulk(); focusRow(key,"na"); });
+    else { const c=state[key]; c.na=false; c.naReason=""; prune(id,tac); rowChanged(key,"na"); }
+    return;
+  }
+  if(keyWork(key) || siblingKeys([key]).some(x=>!keyNA(x))){
+    excludeDialog([key],()=>{ afterBulk(); focusRow(key,"reason"); });
+    return;
+  }
+  const c=ensure(id,tac); c.na=true; rowChanged(key,"reason");
+}
+function focusRow(key,fk){
+  setTimeout(()=>{ const el=listRowEl(key), f=el&&el.querySelector('[data-fk="'+fk+'"]'); if(f) f.focus(); },0);
+}
+LV.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");
+  if(!b){
+    const row=e.target.closest(".lrow");
+    if(selecting && row && !e.target.closest("input,textarea,button,a,.picker")) togglePick(row.dataset.key,e.shiftKey);
+    return;
+  }
+  const row=b.closest(".lrow"); if(!row) return;
+  const key=row.dataset.key, [id,tac]=key.split("|"), act=b.dataset.act;
+  if(act==="pick") togglePick(key,e.shiftKey);
+  else if(act==="open") openPanel(id,tac);
+  else if(act==="score"){
+    const i=Number(b.closest(".lctl").dataset.i), v=Number(b.dataset.v);
+    mutAt(id,tac,i,x=>x.score=(x.score===v?null:v)); rowChanged(key,b.dataset.fk);
+  }
+  else if(act==="rm"){
+    const c=ensure(id,tac); c.list.splice(Number(b.closest(".lctl").dataset.i),1);
+    prune(id,tac); rowChanged(key,"add");
+  }
+  else if(act==="add") openListPicker(key);
+  else if(act==="none") toggleNone(key);
+  else if(act==="na") toggleNA(key);
+});
+LV.addEventListener("input",e=>{
+  const el=e.target, row=el.closest(".lrow"); if(!row) return;
+  const key=row.dataset.key, [id,tac]=key.split("|");
+  if(el.classList.contains("lnote")){
+    mutAt(id,tac,Number(el.closest(".lctl").dataset.i),x=>x.note=el.value); fitNote(el);
+  } else if(el.classList.contains("lown")){
+    const m=(state[key]||{list:[]}).list[Number(el.closest(".lctl").dataset.i)];
+    if(m&&registry[m.cid]){ registry[m.cid].owner=el.value; persist(); }
+  } else if(el.classList.contains("lreason")){
+    const c=state[key]; if(c){ c.naReason=el.value; refreshStats(); }
+  }
+});
+// Redraw after blur (not during typing) so the flags catch up without stealing focus.
+LV.addEventListener("change",e=>{
+  const el=e.target, row=el.closest(".lrow"); if(!row) return;
+  const key=row.dataset.key;
+  if(el.classList.contains("lown")){
+    const m=(state[key]||{list:[]}).list[Number(el.closest(".lctl").dataset.i)];
+    if(!m||!registry[m.cid]) return;
+    const v=canonOwner(el.value,m.cid); registry[m.cid].owner=v; el.value=v; syncOwners(); persist();
+    setTimeout(()=>{ LV.querySelectorAll(".lrow").forEach(r=>{
+      if(r.dataset.key!==key && (state[r.dataset.key]||{list:[]}).list.some(x=>x.cid===m.cid)) replaceRow(r.dataset.key); }); },0);
+  } else if(el.classList.contains("lreason")){
+    setTimeout(()=>rowChanged(key),0);
+  }
+});
+LV.addEventListener("keydown",e=>{
+  const b=e.target; if(!b.matches || !b.matches(".lscale button")) return;
+  const line=b.closest(".lctl"), row=b.closest(".lrow"), key=row.dataset.key, [id,tac]=key.split("|");
+  if(/^[0-3]$/.test(e.key)){
+    e.preventDefault();
+    const i=Number(line.dataset.i), v=Number(e.key);
+    mutAt(id,tac,i,x=>x.score=v); rowChanged(key,"sc"+i+"_"+v);
+  } else if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    e.preventDefault();
+    const all=[...LV.querySelectorAll(".lctl")], nx=all[all.indexOf(line)+(e.key==="ArrowDown"?1:-1)];
+    if(nx){ const f=nx.querySelector('.lscale button[data-v="'+b.dataset.v+'"]'); f.focus(); nx.scrollIntoView({block:"nearest"}); }
+  } else if(e.key==="ArrowLeft"||e.key==="ArrowRight"){
+    e.preventDefault();
+    const bs=[...line.querySelectorAll(".lscale button")], nx=bs[bs.indexOf(b)+(e.key==="ArrowRight"?1:-1)];
+    if(nx) nx.focus();
+  }
+});
+
+/* ---------------- wiring ---------------- */
+const onFilter=()=>{ rerenderView(); updateBulk(); };
+$("#q").oninput=onFilter;
+$("#fSrc").onchange=onFilter;
+$("#fScore").onchange=onFilter;
+$("#kNR").onclick=()=>{
+  $("#fScore").value="nanoreason";
+  if(view==="matrix"||view==="list") onFilter(); else setView(fwView);
+};
+$("#pClose").onclick=requestClose;
+$("#scrim").onclick=requestClose;
+$("#pCancel").onclick=discardPanel;
+$("#pSave").onclick=savePanel;
+const typing=el=>!!el && (el.tagName==="INPUT"||el.tagName==="TEXTAREA"||el.tagName==="SELECT");
+document.onkeydown=e=>{
+  if(dlg){ if(e.key==="Escape"){ e.preventDefault(); closeDialog(true); } return; }
+  if(sel){
+    if(e.key==="Escape") requestClose();
+    else if(e.key==="Enter" && (e.ctrlKey||e.metaKey)){ e.preventDefault(); savePanel(); }
+    return;
+  }
+  if(selecting && e.key==="Escape" && !typing(e.target)) setSelecting(false);
+};
+
+// Framework holds two layouts of the same data; the one you last used is remembered.
+const FW_KEY="f3-framework-view";
+let fwView="matrix";
+try{ if(localStorage.getItem(FW_KEY)==="list") fwView="list"; }catch(e){}
 function setView(v){
   view=v;
-  [["matrix","#vMatrix","#viewMatrix"],["inv","#vInv","#viewInv"],["rep","#vRep","#viewRep"]]
-    .forEach(([n,b,p])=>{$(b).setAttribute("aria-pressed",String(n===v));$(p).classList.toggle("on",n===v);});
-  document.querySelectorAll(".toolbar .field").forEach(f=>{ f.hidden = v!=="matrix"; });
-  if(v!=="matrix") renderViews();
+  const work=v==="matrix"||v==="list";
+  if(work){ fwView=v; try{ localStorage.setItem(FW_KEY,v); }catch(e){} }
+  [["matrix","#viewMatrix"],["list","#viewList"],["inv","#viewInv"],["rep","#viewRep"]]
+    .forEach(([n,p])=>$(p).classList.toggle("on",n===v));
+  $("#vFw").setAttribute("aria-pressed",String(work));
+  $("#vInv").setAttribute("aria-pressed",String(v==="inv"));
+  $("#vRep").setAttribute("aria-pressed",String(v==="rep"));
+  $("#vMatrix").setAttribute("aria-pressed",String(fwView==="matrix"));
+  $("#vList").setAttribute("aria-pressed",String(fwView==="list"));
+  $("#fwBar").hidden=!work;
+  if(!work && selecting){ selecting=false; picked.clear(); lastPick=null;
+    document.body.classList.remove("selecting"); $("#bSelect").setAttribute("aria-pressed","false"); }
+  if(work) rerenderView(); else renderViews();
+  updateBulk();
 }
+$("#vFw").onclick=()=>setView(fwView);
 $("#vMatrix").onclick=()=>setView("matrix");
+$("#vList").onclick=()=>setView("list");
 $("#vInv").onclick=()=>setView("inv");
 $("#vRep").onclick=()=>setView("rep");
 function csvEsc(v){ v=String(v==null?"":v); return /[",\n\r]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
@@ -1658,6 +2454,7 @@ function resetAll(){
   state={}; registry={}; meta.asOf=""; meta.distinct=[]; meta.distinctOwners=[];
   inv.edit=null; inv.merge=null;
   if(storageOK && !storageLocked){ try{ localStorage.removeItem(SKEY); }catch(e){} }
+  picked.clear(); lastPick=null;
   hideRestore(); syncOwners(); closePanel(); refresh();
 }
 function hideRestore(){ const n=$("#restoreNote"); if(n) n.hidden=true; }
@@ -1725,7 +2522,11 @@ $("#bTheme").onclick=()=>{
   applyTheme(theme);
 };
 { const tv=$("#toolVer"); if(tv) tv.textContent=TOOL_VERSION; }
+const setHH=()=>document.documentElement.style.setProperty("--hh",$("header").offsetHeight+"px");
+setHH(); if(window.ResizeObserver) new ResizeObserver(setHH).observe($("header"));
+applyInert();
 syncOwners();
+setView(fwView);
 refresh();
 </script>
 </body>
