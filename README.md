@@ -2,7 +2,7 @@
 
 A single-file browser tool for assessing fraud control coverage against the MITRE Fight Fraud Framework (F3), and for building an inventory of the controls behind that coverage and who owns them.
 
-Built by Andrew Cunningham. Version 1.1.0.
+Built by Andrew Cunningham. Version 1.2.0.
 
 **[Open the tool](https://ag-cunningham.github.io/f3-coverage-assessment/)** · [Download for offline use](../../releases/latest)
 
