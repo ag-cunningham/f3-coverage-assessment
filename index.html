@@ -116,6 +116,11 @@ main{max-width:1560px;margin:0 auto;padding:0 20px 36px}
 .cell.cs3{background:#A5CCB9;border-color:#83B39D}
 .cell.na{background:repeating-linear-gradient(45deg,#F2EFE8,#F2EFE8 7px,#E9E4D7 7px,#E9E4D7 14px)}
 .cell.na .tnm,.cell.na .tid{color:var(--ink-3)}
+/* Parent shown only so its matching sub-techniques keep their hierarchy. Not a match. */
+.cell.ctx{background:transparent;border-style:dashed;box-shadow:none}
+.cell.ctx .tnm,.cell.ctx .tid,.cell.ctx[data-src=attack] .tid{color:var(--ink-3)}
+body.selecting .cell.ctx{cursor:default}
+body.selecting .cell.ctx .pk{display:none}
 
 .panel{position:fixed;top:0;right:0;height:100vh;width:min(480px,100vw);background:var(--card);
   border-left:1px solid var(--rule);box-shadow:-8px 0 28px rgba(20,27,38,.10);
@@ -380,6 +385,10 @@ body.selecting .lrow{grid-template-columns:22px 72px minmax(190px,270px) minmax(
 .lopen:hover{color:var(--accent);text-decoration:underline}
 .lopen:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 .lrow.na .lopen{color:var(--ink-3)}
+.lrow.ctx{padding-top:7px;padding-bottom:7px;background:transparent}
+.lrow.ctx .lopen{color:var(--ink-3);font-weight:500}
+.lrow.ctx .lctxn{font-size:11px;color:var(--ink-3);margin-top:2px}
+body.selecting .lrow.ctx{cursor:default}
 .lmeta{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-top:5px}
 .lmeta .pill{padding:2px 6px}
 .ltog{display:inline-flex;gap:4px;margin-left:4px}
@@ -484,6 +493,7 @@ body.selecting .lrow{grid-template-columns:22px 72px minmax(190px,270px) minmax(
     <label for="fScore">Coverage</label>
     <select id="fScore">
       <option value="all">All</option>
+      <option value="inscope">In scope</option>
       <option value="unassessed">Not assessed</option>
       <option value="gap">Gaps (0&ndash;1)</option>
       <option value="covered">Covered (2&ndash;3)</option>
@@ -536,7 +546,7 @@ body.selecting .lrow{grid-template-columns:22px 72px minmax(190px,270px) minmax(
 
 <footer class="appfoot">
   <div class="fwrap">
-    <p><b>F3 Coverage Assessment</b> v<span id="toolVer">1.1.0</span> &middot; Built by Andrew Cunningham &middot; Apache License 2.0</p>
+    <p><b>F3 Coverage Assessment</b> v<span id="toolVer">1.2.0</span> &middot; Built by Andrew Cunningham &middot; Apache License 2.0</p>
     <p>Framework content &copy; 2026 MITRE, licensed under the Apache License, Version 2.0, from the MITRE Center for Threat-Informed Defense. Technique data converted from MITRE's published F3 v1.1 STIX bundle.
     MITRE Fight Fraud Framework&trade;, MITRE F3&trade;, and MITRE ATT&amp;CK&reg; are trademarks of The MITRE Corporation. This tool is not affiliated with or endorsed by MITRE.</p>
   </div>
@@ -615,7 +625,7 @@ const SCALE = {
 const SCOLOR = {0:"#C9B7AC",1:"#C2CFC6",2:"#8FB8A3",3:"#3D7F67"};
 
 const F3_VERSION = "1.1";
-const TOOL_VERSION = "1.1.0";
+const TOOL_VERSION = "1.2.0";
 const SCHEMA = 2;
 // state:    "ID|tactic" -> {none, na, naReason, list:[{cid, score|null, note}]}
 // registry: cid -> {id, name, owner}   (each control defined once)
@@ -774,6 +784,7 @@ function passFilter(t){
 function passScore(t,tac){
   const f=$("#fScore").value; if(f==="all") return true;
   const r=roll(cellOf(t.id,tac));
+  if(f==="inscope") return r!=="na";
   if(f==="unassessed") return r===null;
   if(f==="na") return r==="na";
   if(f==="nanoreason") return r==="na" && !clean((cellOf(t.id,tac)||{}).naReason);
@@ -821,7 +832,7 @@ function renderMatrix(){
       '<span class="ct">'+statLine(st)+'</span>'+
       '<div class="colbar"><i style="width:'+st.pct+'%"></i></div></div>';
     const mine=rows.filter(r=>r.tac===sn);
-    mine.forEach(r=>col.appendChild(cellEl(r.t,sn,r.isSub)));
+    mine.forEach(r=>col.appendChild(cellEl(r.t,sn,r.isSub,!r.match)));
     if(!mine.length){
       const e=document.createElement("div");
       e.style.cssText="font-size:11px;color:var(--ink-3);padding:8px 2px";
@@ -831,7 +842,8 @@ function renderMatrix(){
   });
 }
 
-function cellEl(t,tac,isSub){
+function cellEl(t,tac,isSub,ctx){
+  if(ctx) return ctxCellEl(t,tac);
   const c=cellOf(t.id,tac), r=roll(c), n=c?c.list.length:0, key=k(t.id,tac), pk=picked.has(key);
   const d=document.createElement("div");
   d.className="cell"+(isSub?" sub":"")+
@@ -848,6 +860,22 @@ function cellEl(t,tac,isSub){
   const act=e=>{ if(selecting) togglePick(key,!!(e&&e.shiftKey)); else openPanel(t.id,tac); };
   d.onclick=act;
   d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act(e);}};
+  return d;
+}
+
+// A parent that does not match the filter but is drawn so its matching subs keep their
+// hierarchy. It shows no status (that would read as a match), can't be bulk-picked, and
+// still opens its panel on click outside bulk mode.
+function ctxCellEl(t,tac){
+  const d=document.createElement("div");
+  d.className="cell ctx"+(sel&&sel.id===t.id&&sel.tactic===tac?" sel":"");
+  d.tabIndex=0; d.dataset.src=t.source; d.dataset.id=t.id; d.dataset.tac=tac;
+  d.title="Shown for context. A sub-technique below matches the filter; this technique does not.";
+  d.innerHTML='<span class="tid mono">'+t.id+'</span>'+
+    '<span class="tnm">'+esc(t.name.replace(/^.*?: /,""))+'<span class="nctl">context</span></span>';
+  const act=()=>{ if(!selecting) openPanel(t.id,tac); };
+  d.onclick=act;
+  d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}};
   return d;
 }
 
@@ -2006,7 +2034,7 @@ function setSelecting(on){
 }
 function togglePick(key,range){
   if(range && lastPick && lastPick!==key){
-    const order=shownRows().map(r=>r.key);
+    const order=shownRows().filter(r=>r.match).map(r=>r.key);
     let a=order.indexOf(lastPick), b=order.indexOf(key);
     if(a>=0 && b>=0){ if(a>b){ const x=a; a=b; b=x; } order.slice(a,b+1).forEach(x=>picked.add(x)); }
     else picked.add(key);
@@ -2020,7 +2048,7 @@ function togglePick(key,range){
   updatePickedMarks(); updateBulk();
 }
 function updatePickedMarks(){
-  document.querySelectorAll("#matrix .cell").forEach(el=>{
+  document.querySelectorAll("#matrix .cell:not(.ctx)").forEach(el=>{
     const on=picked.has(k(el.dataset.id,el.dataset.tac));
     el.classList.toggle("picked",on);
     if(selecting){ el.setAttribute("role","checkbox"); el.setAttribute("aria-checked",String(on)); }
@@ -2030,9 +2058,10 @@ function updatePickedMarks(){
     el.classList.toggle("picked",on); if(cb) cb.checked=on;
   });
 }
-// Bulk actions only touch selected techniques that are on screen, so changing a filter
-// can never make them act on something you can no longer see.
-function actionable(){ const vis=new Set(shownRows().map(r=>r.key)); return [...picked].filter(x=>vis.has(x)); }
+// Bulk actions only touch selected techniques that match the current filters, so changing
+// a filter can never make them act on something you can no longer see, or on a parent
+// that is only on screen for context.
+function actionable(){ const vis=new Set(shownRows().filter(r=>r.match).map(r=>r.key)); return [...picked].filter(x=>vis.has(x)); }
 function updateBulk(){
   const on=selecting && (view==="matrix"||view==="list");
   $("#bulk").hidden=!on; document.body.classList.toggle("hasbulk",on);
@@ -2194,7 +2223,17 @@ function lctlHTML(m,i){
     '<textarea class="lnote" rows="1" data-fk="note'+i+'" placeholder="Notes and evidence" aria-label="Notes for '+nm+'">'+esc(m.note)+'</textarea>'+
     '<button class="lrm" data-act="rm" data-fk="rm'+i+'" title="Remove from this technique" aria-label="Remove '+nm+' from this technique">&times;</button></div>';
 }
+function ctxRowHTML(r){
+  const t=r.t;
+  return '<div class="lrow ctx'+(r.isSub?' sub':'')+'" data-key="'+esc(r.key)+'" data-src="'+t.source+'" data-ctx="1">'+
+    '<div class="lsel"></div>'+
+    '<div class="lid mono">'+t.id+'</div>'+
+    '<div class="lname"><button class="lopen" data-act="open" data-fk="open" title="Open technique details">'+esc(t.name.replace(/^.*?: /,""))+'</button>'+
+      '<div class="lctxn">Shown for context only</div></div>'+
+    '<div class="lwork"></div></div>';
+}
 function rowHTML(r){
+  if(r.match===false) return ctxRowHTML(r);
   const t=r.t, key=r.key, c=cellOf(t.id,r.tac), ro=roll(c), na=ro==="na", none=!!(c&&c.none&&!na);
   const list=c?c.list:[], pk=picked.has(key);
   let chip;
@@ -2235,8 +2274,9 @@ function updateSavedNote(){
   el.textContent=lastSaved?"Last saved "+lastSaved.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"})+".":"";
 }
 function renderList(){
-  const rows=shownRows();
-  let h='<div class="rowhead lhead"><h2>'+rows.length+' technique'+(rows.length===1?'':'s')+' shown</h2>'+
+  const rows=shownRows(), nm=rows.filter(r=>r.match).length, nc=rows.length-nm;
+  let h='<div class="rowhead lhead"><h2>'+nm+' technique'+(nm===1?'':'s')+' match'+(nm===1?'es':'')+
+    (nc?' <small style="font-weight:400;color:var(--ink-3)">plus '+nc+' parent'+(nc===1?'':'s')+' shown for context</small>':'')+'</h2>'+
     '<p>Scores: 0 None, 1 Partial, 2 Detective, 3 Preventive. Changes save as you make them. <span id="lSaved"></span></p></div>';
   if(!rows.length){
     LV.innerHTML=h+'<div class="empty">No techniques match these filters.</div>';
@@ -2251,11 +2291,11 @@ function renderList(){
   if(listPick){ const el=listRowEl(listPick); if(el) mountListPicker(el,listPick); else listPick=null; }
   updateSavedNote();
 }
-function rowInfo(key){ const [id,tac]=key.split("|"), t=byId[id]; return {t,tac,isSub:!!t.isSub,key}; }
+function rowInfo(key,ctx){ const [id,tac]=key.split("|"), t=byId[id]; return {t,tac,isSub:!!t.isSub,key,match:!ctx}; }
 function replaceRow(key,fk){
   const el=listRowEl(key); if(!el) return null;
   const a=document.activeElement, fkey=fk||(a&&el.contains(a)?a.dataset.fk:null);
-  const tmp=document.createElement("div"); tmp.innerHTML=rowHTML(rowInfo(key));
+  const tmp=document.createElement("div"); tmp.innerHTML=rowHTML(rowInfo(key,el.dataset.ctx==="1"));
   const nw=tmp.firstElementChild; el.replaceWith(nw); fitNotes(nw);
   if(listPick===key) mountListPicker(nw,key);
   else if(fkey){ const f=nw.querySelector('[data-fk="'+fkey+'"]'); if(f) f.focus({preventScroll:true}); }
@@ -2318,7 +2358,7 @@ LV.addEventListener("click",e=>{
   const b=e.target.closest("[data-act]");
   if(!b){
     const row=e.target.closest(".lrow");
-    if(selecting && row && !e.target.closest("input,textarea,button,a,.picker")) togglePick(row.dataset.key,e.shiftKey);
+    if(selecting && row && !row.dataset.ctx && !e.target.closest("input,textarea,button,a,.picker")) togglePick(row.dataset.key,e.shiftKey);
     return;
   }
   const row=b.closest(".lrow"); if(!row) return;
