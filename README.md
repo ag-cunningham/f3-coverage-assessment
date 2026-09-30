@@ -2,7 +2,7 @@
 
 A single-file browser tool for assessing fraud control coverage against the MITRE Fight Fraud Framework (F3), and for building an inventory of the controls behind that coverage and who owns them.
 
-Built by Andrew Cunningham. Version 1.2.0.
+Built by Andrew Cunningham. Version 1.3.0.
 
 **[Open the tool](https://ag-cunningham.github.io/f3-coverage-assessment/)** · [Download for offline use](../../releases/latest)
 
@@ -12,7 +12,7 @@ Built by Andrew Cunningham. Version 1.2.0.
 
 A self-contained HTML file that renders the full F3 matrix and lets a fraud team record which controls address which techniques, how well, with what evidence, and who is accountable for each control.
 
-The entire framework is embedded in the file: 8 tactics, 123 techniques, 169 technique-and-tactic pairings, taken from MITRE's published F3 v1.1 data. There is no installation, no build step, and no internet connection required. Open the file in a browser and it works.
+The entire framework is embedded in the file: 8 tactics, 139 techniques, 192 technique-and-tactic pairings, taken from MITRE's published F3 v1.2 data. There is no installation, no build step, and no internet connection required. Open the file in a browser and it works.
 
 ## Why was it created?
 
@@ -62,7 +62,7 @@ The scale:
 - If saved work in the browser uses a newer storage format than the version of the tool opening it, that version leaves the work untouched and pauses autosave rather than overwriting it. Versions 1.0.0 and 1.1.0 share a format, so either opens the other's work. Export JSON from 1.1.0 rather than 1.0.0, since 1.0.0 does not export controls kept on out-of-scope techniques.
 - Loading a file replaces the open assessment, and the tool asks for confirmation first.
 - Nothing is transmitted anywhere. All data stays in the browser on the local machine.
-- Framework data is fixed at F3 v1.1. Exports record the version they were built against and warn on mismatch when a later version is loaded. Updating to a new F3 release requires regenerating the embedded data.
+- Framework data is fixed at F3 v1.2. Assessments recorded against an earlier F3 release carry over when opened, and entries whose technique MITRE has since changed are flagged for review until marked reviewed.
 - Assessments exported from earlier versions of the tool import cleanly, and controls entered under slightly different spellings are combined on import.
 - Scoring reflects the assessor's judgment. The tool structures and documents that judgment; it does not validate it.
 
@@ -70,6 +70,6 @@ The scale:
 
 The tool is released under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.
 
-Framework content © 2026 MITRE, from the [MITRE Fight Fraud Framework](https://github.com/center-for-threat-informed-defense/fight-fraud-framework), licensed under the Apache License, Version 2.0. The embedded technique data was converted from MITRE's published F3 v1.1 STIX bundle into the format this tool uses.
+Framework content © 2026 MITRE, from the [MITRE Fight Fraud Framework](https://github.com/center-for-threat-informed-defense/fight-fraud-framework), licensed under the Apache License, Version 2.0. The embedded technique data was converted from MITRE's published F3 v1.2 STIX bundle into the format this tool uses.
 
 MITRE Fight Fraud Framework™, MITRE F3™, and MITRE ATT&CK® are trademarks of The MITRE Corporation. This project is not affiliated with or endorsed by MITRE.
