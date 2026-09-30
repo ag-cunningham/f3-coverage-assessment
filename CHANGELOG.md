@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0
+
+Built against MITRE F3 v1.1. No storage schema change: autosaves and JSON exports from 1.1.0 and 1.0.0 open unchanged.
+
+### Added
+
+- **"In scope" coverage filter.** Shows every technique not excluded from scope, including ones not yet assessed. Available in both the Matrix and List views.
+
+### Fixed
+
+- **Parents shown for context no longer look like filter matches.** When a filter matches a sub-technique but not its parent, the parent still appears so the hierarchy stays readable. It now shows as a muted, dashed "context" entry with no score or status, instead of looking like it matched. The List view header counts only real matches and notes how many parents are shown for context.
+- **Bulk scope no longer selects or acts on context parents.** Previously, clicking or shift-click range-selecting could pick up a parent shown only for context, and "Exclude from scope" could then exclude it unintentionally. Bulk actions now apply only to selected techniques that match the current filters.
+
 ## 1.1.0
 
 Built against MITRE F3 v1.1. No storage schema change: autosaves and JSON exports from 1.0.0 open unchanged.
