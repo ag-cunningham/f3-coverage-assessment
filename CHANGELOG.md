@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.3.0
+
+Built against MITRE F3 v1.2. Storage schema 3. Autosaves and JSON exports from earlier versions open and carry forward. Older versions of the tool will not overwrite a 1.3.0 autosave.
+
+### Changed
+
+- **Framework data updated to MITRE F3 v1.2** (released September 29, 2026): 139 techniques and 192 technique-tactic pairings, up from 123 and 169. All v1.1 technique IDs carry over unchanged.
+
+### Added
+
+- **Framework update review.** When an assessment recorded against F3 v1.1 is opened, from autosave or a JSON file, every entry carries over. Entries whose technique MITRE changed are flagged for review: a changed definition or name, or new sub-techniques added under it. Flagged entries are marked in the Matrix and List views and counted in the header. A new "Needs review (F3 update)" coverage filter shows only those entries. Each one's panel explains what changed and compares the old and new definitions, and "Mark reviewed" clears the flag. Flags travel with JSON exports. Until they're cleared, the report lists them and notes that their scores may not reflect current definitions.
+- **"New in F3 v1.2" filter** under Show, listing the 16 techniques added in this release.
+- **Technique tags** in the panel identify techniques that are new or updated in the current F3 release.
+
+### Fixed
+
+- **The JSON export description and report subtitle no longer hardcode F3 v1.1.** They now read the framework version from the data.
+
+
 ## 1.2.0
 
 Built against MITRE F3 v1.1. No storage schema change: autosaves and JSON exports from 1.1.0 and 1.0.0 open unchanged.
