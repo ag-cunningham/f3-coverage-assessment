@@ -2,7 +2,7 @@
 
 A single-file browser tool for assessing fraud control coverage against the MITRE Fight Fraud Framework (F3), and for building an inventory of the controls behind that coverage and who owns them.
 
-Built by Andrew Cunningham. Version 1.3.0.
+Built by Andrew Cunningham. Version 1.4.0.
 
 **[Open the tool](https://ag-cunningham.github.io/f3-coverage-assessment/)** · [Download for offline use](../../releases/latest)
 
@@ -12,7 +12,7 @@ Built by Andrew Cunningham. Version 1.3.0.
 
 A self-contained HTML file that renders the full F3 matrix and lets a fraud team record which controls address which techniques, how well, with what evidence, and who is accountable for each control.
 
-The entire framework is embedded in the file: 8 tactics, 139 techniques, 192 technique-and-tactic pairings, taken from MITRE's published F3 v1.2 data. There is no installation, no build step, and no internet connection required. Open the file in a browser and it works.
+The entire framework is embedded in the file: 8 tactics, 160 techniques, taken from MITRE's published F3 v1.2 data. There is no installation, no build step, and no internet connection required. Open the file in a browser and it works.
 
 ## Why was it created?
 
@@ -53,6 +53,24 @@ The scale:
 6. **Review the control inventory.** Resolve any flagged duplicates, assign owners where they are missing, and score anything marked as needing it. Look for controls scoring inconsistently across contexts, and for controls carrying more coverage than expected.
 7. **Build the report.** Choose sections, set the "current as of" date, add your name and organization, then print to PDF or save for Word.
 8. **Export before you finish.** Work autosaves in the browser, but the JSON export is the durable copy and the one to share or version.
+
+## Getting help in the tool
+
+Select **Help** (next to Reset) for a quick-start guide, the scoring scale, how saving works, and keyboard shortcuts. It is built into the page, so it works offline. The footer links back to this README, to Issues, and to Releases.
+
+## Framework version
+
+The tool embeds **MITRE F3 v1.2, October 21, 2026 revision** (160 techniques across 8 tactics), converted from MITRE's published STIX bundle.
+
+MITRE revised the v1.2 bundle in October 2026 without changing its version number, so the tool records the bundle revision separately (`f3_release` in JSON exports). When you load work saved against an earlier release:
+
+- Every entry carries over.
+- Entries on techniques MITRE retired move to the replacement technique: T1660 → T1566, T1585 → F1060, T1585.004 → F1060.001, F1010 → F1017.003. If the replacement already has entries, controls are merged and the higher score is kept.
+- Entries whose technique was moved, renamed, redefined, or gained sub-techniques are flagged **to review**. Open one to see what changed and compare definitions, then select **Mark reviewed**. Unreviewed entries are listed in the report.
+
+## Checking for updates
+
+The tool never contacts the network, so it cannot tell you when a new version exists. Check [Releases](https://github.com/ag-cunningham/f3-coverage-assessment/releases) (also linked in the footer and in Help). Each release attaches a versioned HTML file so an assessment can be reopened in the exact version it was built with.
 
 ## Notes and limitations
 
